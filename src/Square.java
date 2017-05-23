@@ -9,7 +9,7 @@ public class Square {
 
     /* Stores options for the true value */
     private Set<Integer> candidates;
-    private int value;
+    private Integer value;
 
     /* Stores location of square in puzzle */
     private final int row;
@@ -23,9 +23,9 @@ public class Square {
         for (int i = 0; i < 9; i++)
             candidates.add(i + 1);
 
-        /* initialize value to blank (-1) or prefilled value */
+        /* initialize value to blank (null) or prefilled value */
         if (init_val < 1 || init_val > 9)
-            value = -1;
+            value = null;
         else
             value = init_val;
 
@@ -41,6 +41,9 @@ public class Square {
 
     public int get_value()
     {
+        if (value == null)
+            return -1;
+
         return value;
     }
 

@@ -7,15 +7,15 @@ import java.util.HashSet;
 
 public class Square {
 
-    /* Stores options for the true final_value */
+    /* Stores options for the true value */
     private Set<Integer> candidates;
-    private int final_value;
+    private int value;
 
     /* Stores location of square in puzzle */
     private final int row;
     private final int col;
 
-    public Square(int row, int col)
+    public Square(int row, int col, int init_val)
     {
         candidates = new HashSet<Integer>();
 
@@ -23,7 +23,12 @@ public class Square {
         for (int i = 0; i < 9; i++)
             candidates.add(i + 1);
 
-        final_value = 0;
+        /* initialize value to blank (-1) or prefilled value */
+        if (init_val < 1 || init_val > 9)
+            value = -1;
+        else
+            value = init_val;
+
         this.row = row;
         this.col = col;
     }
@@ -34,9 +39,9 @@ public class Square {
         return candidates;
     }
 
-    public int get_final_value()
+    public int get_value()
     {
-        return final_value;
+        return value;
     }
 
     public int get_row()
@@ -51,7 +56,7 @@ public class Square {
 
     /**
      * Setters are uneccessary
-     * No reason for outside objects to manipulate candidates/final_value
+     * No reason for outside objects to manipulate candidates/value
      * row and col cannot (and should not) be able to change after creation
      */
 }

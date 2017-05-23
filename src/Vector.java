@@ -22,4 +22,18 @@ public class Vector {
 
         return vector_data[index].get_value();
     }
+
+    public String toString()
+    {
+        StringBuilder s = new StringBuilder();
+
+        s.append("[");
+        for (int i = 0; i < vector_data.length - 1; i++)
+        {
+            s.append(vector_data[i].get_value() + ", ");
+        }
+        s.append(vector_data[vector_data.length - 1].get_value() + "]");
+
+        return s.toString();
+    }
 }

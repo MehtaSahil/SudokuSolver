@@ -26,4 +26,9 @@ public class Block {
     {
         return block_data[sub_row][sub_col].get_value();
     }
+
+    public String toString()
+    {
+        return "";
+    }
 }

@@ -57,9 +57,5 @@ public class Square {
         return col;
     }
 
-    /**
-     * Setters are uneccessary
-     * No reason for outside objects to manipulate candidates/value
-     * row and col cannot (and should not) be able to change after creation
-     */
+    public void set_value(int new_value) { value = new_value; }
 }

@@ -32,7 +32,6 @@ public class ColPuzzle {
             }
 
             col_puzzle_data[c] = new Vector(slice);
-            // System.out.println(col_puzzle_data[c].get_vector_data()[0] == null);
         }
     }
 

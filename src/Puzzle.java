@@ -4,17 +4,27 @@
 
 public class Puzzle {
 
-    private RowPuzzle rPuzzle;
-    private ColPuzzle cPuzzle;
+    private Square[][] standard_puzzle;
+    private RowPuzzle row_puzzle;
+    private ColPuzzle col_puzzle;
+    private BlockPuzzle block_puzzle;
 
     public Puzzle(Square[][] init_data)
     {
-        rPuzzle = new RowPuzzle(init_data);
-        cPuzzle = new ColPuzzle(init_data);
+        standard_puzzle = init_data;
+        row_puzzle = new RowPuzzle(init_data);
+        col_puzzle = new ColPuzzle(init_data);
+        block_puzzle = new BlockPuzzle(init_data);
+    }
 
-        System.out.println("row puzzle");
-        System.out.println(rPuzzle);
-        System.out.println("column puzzle");
-        System.out.println(cPuzzle);
+    public void solve()
+    {
+        /* Solve the puzzle! (lots more work to be done) */
+    }
+
+    public String toString()
+    {
+        /* could return any of the puzzle types */
+        return block_puzzle.toString();
     }
 }

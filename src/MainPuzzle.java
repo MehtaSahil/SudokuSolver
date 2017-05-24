@@ -45,10 +45,10 @@ public class MainPuzzle {
                 Square temp = standard_puzzle[r][c];
                 Set<Integer> candidates = temp.get_candidates();
 
-                Set<Integer> vals_to_remove = row_puzzle.get_row_vector(r).get_contained_values();
+                Set<Integer> vals_to_remove = row_puzzle.get_vector(r).get_contained_values();
                 candidates.removeAll(vals_to_remove);
 
-                vals_to_remove = col_puzzle.get_col_vector(c).get_contained_values();
+                vals_to_remove = col_puzzle.get_vector(c).get_contained_values();
                 candidates.removeAll(vals_to_remove);
 
                 vals_to_remove = block_puzzle.get_block(r / 3, c / 3).get_contained_values();
@@ -60,6 +60,6 @@ public class MainPuzzle {
     public String toString()
     {
         /* could return any of the puzzle types */
-        return block_puzzle.toString();
+        return col_puzzle.toString();
     }
 }

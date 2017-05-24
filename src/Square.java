@@ -33,7 +33,7 @@ public class Square {
         this.col = col;
     }
 
-    /* Getters */
+    /* Getters/Setters */
     public Set<Integer> get_candidates()
     {
         return candidates;

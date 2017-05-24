@@ -35,6 +35,15 @@ public class RowPuzzle {
         }
     }
 
+    /**
+     * @param index
+     * @return Vector at [index] in row_puzzle_data
+     */
+    public Vector get_row_vector(int index)
+    {
+        return row_puzzle_data[index];
+    }
+
     public String toString()
     {
         StringBuilder s = new StringBuilder();
@@ -43,7 +52,7 @@ public class RowPuzzle {
         {
             for (int c = 0; c < num_cols; c++)
             {
-                s.append(row_puzzle_data[r].get(c) + ", ");
+                s.append(row_puzzle_data[r].get_value(c) + ", ");
             }
 
             s.append("\n");

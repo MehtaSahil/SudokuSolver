@@ -40,6 +40,11 @@ public class BlockPuzzle {
         }
     }
 
+    public Block get_block(int sub_row, int sub_col)
+    {
+        return block_puzzle_data[sub_row][sub_col];
+    }
+
     public String toString()
     {
         StringBuilder s = new StringBuilder();
@@ -54,7 +59,7 @@ public class BlockPuzzle {
 
                 Block temp = block_puzzle_data[hl_row][hl_col];
 
-                s.append(temp.get(sub_row, sub_col) + ", ");
+                s.append(temp.get_value(sub_row, sub_col) + ", ");
             }
 
             s.append("\n");

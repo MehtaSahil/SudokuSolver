@@ -17,7 +17,7 @@ public class Runner {
                         {7, 0, 3, 0, 1, 8, 0, 0, 0}};
 
         Square[][] init_data = DataConverter.convertMatrixToSquares(input);
-        Puzzle p = new Puzzle(init_data);
+        MainPuzzle p = new MainPuzzle(init_data);
 
         System.out.println(p);
         /* p.solve();

@@ -1,3 +1,8 @@
+import PuzzlePieces.Square;
+import SubPuzzles.BlockPuzzle;
+import SubPuzzles.ColPuzzle;
+import SubPuzzles.RowPuzzle;
+
 import java.util.Set;
 
 /**
@@ -33,8 +38,8 @@ public class MainPuzzle {
     }
 
     /**
-     * Goes through every Square and updates its availabe candidates
-     * based on filled values in Row/Col/Block Puzzles
+     * Goes through every PuzzlePieces.Square and updates its availabe candidates
+     * based on filled values in Row/Col/PuzzlePieces.Block Puzzles
      */
     public void update_candidates()
     {

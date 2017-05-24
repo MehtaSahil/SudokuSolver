@@ -1,4 +1,4 @@
-/**
+package PuzzlePieces; /**
  * Created by sahil on 5/23/17.
  */
 
@@ -21,7 +21,7 @@ public class Block {
 
         /* check that init_data is a 3x3 matrix */
         if (init_data.length != 3 || init_data[0].length != 3)
-            throw new IllegalArgumentException("Block Constructor: init_data must be 3x3");
+            throw new IllegalArgumentException("PuzzlePieces.Block Constructor: init_data must be 3x3");
 
         block_data = init_data;
         contained_values = new HashSet<Integer>();

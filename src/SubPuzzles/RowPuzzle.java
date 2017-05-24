@@ -1,10 +1,16 @@
+package SubPuzzles;
+
+import Abstract.AbstractVectorPuzzle;
+import PuzzlePieces.Square;
+import PuzzlePieces.Vector;
+
 /**
  * Created by sahil on 5/23/17.
  */
 
-public class ColPuzzle extends AbstractVectorPuzzle {
+public class RowPuzzle extends AbstractVectorPuzzle {
 
-    public ColPuzzle(Square[][] init_data)
+    public RowPuzzle(Square[][] init_data)
     {
         super(init_data);
         init_puzzle_data(init_data);
@@ -12,16 +18,16 @@ public class ColPuzzle extends AbstractVectorPuzzle {
 
     protected void init_puzzle_data(Square[][] init_data)
     {
-        /* create a new Vector for each col in init_data */
-        for (int c = 0; c < num_cols; c++)
+        /* create a new PuzzlePieces.Vector for each row in init_data */
+        for (int r = 0; r < num_rows; r++)
         {
             Square[] slice = new Square[num_cols];
-            for (int r = 0; r < num_rows; r++)
+            for (int c = 0; c < num_cols; c++)
             {
-                slice[r] = init_data[r][c];
+                slice[c] = init_data[r][c];
             }
 
-            vector_puzzle_data[c] = new Vector(slice);
+            vector_puzzle_data[r] = new Vector(slice);
         }
     }
 
@@ -33,7 +39,7 @@ public class ColPuzzle extends AbstractVectorPuzzle {
         {
             for (int c = 0; c < num_cols; c++)
             {
-                s.append(vector_puzzle_data[c].get_value(r) + ", ");
+                s.append(vector_puzzle_data[r].get_value(c) + ", ");
             }
 
             s.append("\n");

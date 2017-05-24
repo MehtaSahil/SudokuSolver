@@ -1,3 +1,8 @@
+package Abstract;
+
+import PuzzlePieces.Square;
+import PuzzlePieces.Vector;
+
 /**
  * Created by sahil on 5/24/17.
  */
@@ -12,7 +17,7 @@ public abstract class AbstractVectorPuzzle {
         num_cols = init_data[0].length;
 
         if (num_rows != num_cols || num_rows != 9)
-            throw new IllegalArgumentException("RowPuzzle Constructor: init_data must be 9x9");
+            throw new IllegalArgumentException("SubPuzzles.RowPuzzle Constructor: init_data must be 9x9");
 
         vector_puzzle_data = new Vector[num_rows];
     }
@@ -21,7 +26,7 @@ public abstract class AbstractVectorPuzzle {
 
     /**
      * @param index
-     * @return Vector at [index] in vector_puzzle_data
+     * @return PuzzlePieces.Vector at [index] in vector_puzzle_data
      */
     public Vector get_vector(int index)
     {

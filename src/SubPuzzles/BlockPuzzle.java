@@ -1,3 +1,8 @@
+package SubPuzzles;
+
+import PuzzlePieces.Block;
+import PuzzlePieces.Square;
+
 /**
  * Created by sahil on 5/23/17.
  */
@@ -30,10 +35,10 @@ public class BlockPuzzle {
     }
 
     /**
-     * @param hl_row the "high level" row index of the Block to be created
-     * @param hl_col the "high level" col index of the Block to be created
+     * @param hl_row the "high level" row index of the PuzzlePieces.Block to be created
+     * @param hl_col the "high level" col index of the PuzzlePieces.Block to be created
      * @param init_data input data
-     * @return Returns a sub-matrix representing a 3x3 section of the puzzle (i.e. a Block)
+     * @return Returns a sub-matrix representing a 3x3 section of the puzzle (i.e. a PuzzlePieces.Block)
      */
     private Square[][] get_square_sub_matrix(int hl_row, int hl_col, Square[][] init_data)
     {

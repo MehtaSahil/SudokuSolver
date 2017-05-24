@@ -17,17 +17,23 @@ public class Square {
 
     public Square(int row, int col, int init_val)
     {
-        candidates = new HashSet<Integer>();
-
-        /* Fill with all possible candidates on initialization */
-        for (int i = 0; i < 9; i++)
-            candidates.add(i + 1);
-
         /* initialize value to blank (null) or prefilled value */
         if (init_val < 1 || init_val > 9)
             value = null;
         else
             value = init_val;
+
+        candidates = new HashSet<Integer>();
+
+        /**
+         * Fill with all possible candidates on initialization
+         * ONLY if the spot hasn't been filled with a value
+         */
+        if (value == null)
+        {
+            for (int i = 0; i < 9; i++)
+                candidates.add(i + 1);
+        }
 
         this.row = row;
         this.col = col;

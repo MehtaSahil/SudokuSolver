@@ -25,14 +25,13 @@ public class Block {
 
         block_data = init_data;
         contained_values = new HashSet<Integer>();
-//        for (int r = 0; r < 3; r++)
-//        {
-//            for (int c = 0; c < 3; c++)
-//            {
-//                // contained_values.add(block_data[r][c].get_value());
-//                System.out.println(block_data[r][c] == null);
-//            }
-//        }
+        for (int r = 0; r < 3; r++)
+        {
+            for (int c = 0; c < 3; c++)
+            {
+                contained_values.add(block_data[r][c].get_value());
+            }
+        }
     }
 
     public int get_value(int sub_row, int sub_col)

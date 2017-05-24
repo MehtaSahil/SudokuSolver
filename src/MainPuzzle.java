@@ -24,7 +24,7 @@ public class MainPuzzle {
         num_rows = init_data.length;
         num_cols = init_data[0].length;
 
-//        update_candidates();
+        update_candidates();
     }
 
     public void solve()
@@ -51,7 +51,7 @@ public class MainPuzzle {
                 vals_to_remove = col_puzzle.get_col_vector(c).get_contained_values();
                 candidates.removeAll(vals_to_remove);
 
-                vals_to_remove = block_puzzle.get_block(r, c).get_contained_values();
+                vals_to_remove = block_puzzle.get_block(r / 3, c / 3).get_contained_values();
                 candidates.removeAll(vals_to_remove);
             }
         }

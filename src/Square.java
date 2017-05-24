@@ -42,7 +42,7 @@ public class Square {
     public int get_value()
     {
         if (value == null)
-            return -1;
+            return 0;
 
         return value;
     }

@@ -22,7 +22,7 @@ public class Block {
         block_data = init_data;
     }
 
-    public int get_value_at_index(int sub_row, int sub_col)
+    public int get(int sub_row, int sub_col)
     {
         return block_data[sub_row][sub_col].get_value();
     }

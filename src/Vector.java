@@ -15,12 +15,17 @@ public class Vector {
         vector_data = init_data;
     }
 
-    public int get_value_at_index(int index)
+    public int get(int index)
     {
         if (index > vector_data.length)
             throw new IllegalArgumentException("Vector index out of bounds");
 
         return vector_data[index].get_value();
+    }
+
+    public Square[] get_vector_data()
+    {
+        return vector_data;
     }
 
     public String toString()

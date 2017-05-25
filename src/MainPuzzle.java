@@ -79,15 +79,13 @@ public class MainPuzzle {
     {
         Iterator<Square> iter;
 
-        for (int c = 0; c < num_cols; c++)
-        {
-            standard_puzzle[row][c].remove_single_candidate(assigned_value);
-        }
+        iter = row_puzzle.get_vector(row).iterator();
+        while (iter.hasNext())
+            iter.next().remove_single_candidate(assigned_value);
 
-        for (int r = 0; r < num_rows; r++)
-        {
-            standard_puzzle[r][col].remove_single_candidate(assigned_value);
-        }
+        iter = col_puzzle.get_vector(col).iterator();
+        while (iter.hasNext())
+            iter.next().remove_single_candidate(assigned_value);
 
         iter = block_puzzle.get_block(row / 3, col / 3).iterator();
         while (iter.hasNext())

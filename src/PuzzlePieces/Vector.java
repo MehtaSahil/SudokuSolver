@@ -2,10 +2,11 @@ package PuzzlePieces; /**
  * Created by sahil on 5/23/17.
  */
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Vector {
+public class Vector implements Iterable<Square>{
 
     /**
      * vector_data holds the Squares present in the vector
@@ -72,5 +73,30 @@ public class Vector {
         s.append(vector_data[vector_data.length - 1].get_value() + "]");
 
         return s.toString();
+    }
+
+    @Override
+    public Iterator<Square> iterator() {
+        return new VectorIterator();
+    }
+
+    private class VectorIterator implements Iterator<Square>
+    {
+        private int current_index;
+
+        public VectorIterator()
+        {
+            current_index = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current_index < vector_data.length;
+        }
+
+        @Override
+        public Square next() {
+            return vector_data[current_index++];
+        }
     }
 }

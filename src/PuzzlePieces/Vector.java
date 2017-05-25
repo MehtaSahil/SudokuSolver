@@ -30,7 +30,11 @@ public class Vector {
         contained_values = new HashSet<Integer>();
         for (int i = 0; i < vector_data.length; i++)
         {
-            contained_values.add(vector_data[i].get_value());
+            int to_add = vector_data[i].get_value();
+            if (to_add == 0)
+                continue;
+
+            contained_values.add(to_add);
         }
     }
 
@@ -46,9 +50,9 @@ public class Vector {
         return vector_data[index].get_value();
     }
 
-    public Square[] get_vector_data()
+    public void add_to_contained_values(int to_add)
     {
-        return vector_data;
+        contained_values.add(to_add);
     }
 
     public Set<Integer> get_contained_values()

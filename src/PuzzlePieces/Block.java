@@ -39,6 +39,11 @@ public class Block {
         return block_data[sub_row][sub_col].get_value();
     }
 
+    public void add_to_contained_values(int to_add)
+    {
+        contained_values.add(to_add);
+    }
+
     public Square[][] get_block_data()
     {
         return block_data;

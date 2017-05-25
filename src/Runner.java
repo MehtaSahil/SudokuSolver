@@ -20,9 +20,6 @@ public class Runner {
 
         Square[][] init_data = DataConverter.convertMatrixToSquares(input);
         MainPuzzle p = new MainPuzzle(init_data);
-
         System.out.println(p);
-        /* p.solve();
-        System.out.println(p); */
     }
 }

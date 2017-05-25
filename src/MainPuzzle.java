@@ -62,6 +62,26 @@ public class MainPuzzle {
         }
     }
 
+    /**
+     * Sets value at specified location in puzzle
+     * Manages candidate updates automatically
+     * Manages Vector contained_value updates automatically
+     *
+     * @param row row index of Square at which a value will be set
+     * @param col col index of Square at which a value will be set
+     */
+    public void set_value(int row, int col, int new_value)
+    {
+        Square toSet = standard_puzzle[row][col];
+        toSet.set_value(new_value);
+
+        row_puzzle.get_vector(row).add_to_contained_values(new_value);
+        col_puzzle.get_vector(col).add_to_contained_values(new_value);
+        block_puzzle.get_block(row / 3, col / 3).add_to_contained_values(new_value);
+
+        update_candidates();
+    }
+
     public String toString()
     {
         /* could return any of the puzzle types */

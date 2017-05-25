@@ -7,11 +7,14 @@ import PuzzlePieces.Square;
  * Created by sahil on 5/23/17.
  */
 
-public class BlockPuzzle {
+import java.util.Iterator;
+
+public class BlockPuzzle implements Iterable<Block> {
 
     private final int num_rows;
     private final int num_cols;
     private Block[][] block_puzzle_data;
+    private final int data_size;
 
     public BlockPuzzle(Square[][] init_data)
     {
@@ -19,6 +22,8 @@ public class BlockPuzzle {
         num_cols = init_data[0].length;
 
         block_puzzle_data = new Block[3][3];
+        data_size = 3 * 3;
+
         init_block_puzzle_data(init_data);
     }
 
@@ -83,5 +88,43 @@ public class BlockPuzzle {
         }
 
         return s.toString();
+    }
+
+    public Iterator<Block> iterator()
+    {
+        return new BlockPuzzleIterator();
+    }
+
+    private class BlockPuzzleIterator implements Iterator<Block>
+    {
+        private int current_hl_row;
+        private int current_hl_col;
+
+        public BlockPuzzleIterator()
+        {
+            current_hl_row = 0;
+            current_hl_col = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return ((3*current_hl_row)+current_hl_col) < data_size;
+        }
+
+        @Override
+        public Block next() {
+            Block toReturn = block_puzzle_data[current_hl_row][current_hl_col];
+            if (current_hl_col + 1 >= 3)
+            {
+                current_hl_row++;
+                current_hl_col = 0;
+            }
+            else
+            {
+                current_hl_col++;
+            }
+
+            return toReturn;
+        }
     }
 }

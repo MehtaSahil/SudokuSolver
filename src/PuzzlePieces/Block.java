@@ -11,9 +11,11 @@ public class Block implements Iterable<Square> {
     /* "high level" row and col represents index of block in 3x3 matrix*/
     private final int hl_row;
     private final int hl_col;
+    private final int num_rows;
+    private final int num_cols;
 
     private Square[][] block_data;
-    private int data_size;
+    private final int data_size;
 
     private Set<Integer> contained_values;
 
@@ -27,12 +29,15 @@ public class Block implements Iterable<Square> {
             throw new IllegalArgumentException("PuzzlePieces.Block Constructor: init_data must be 3x3");
 
         block_data = init_data;
-        data_size = block_data.length * block_data[0].length;
+        num_rows = block_data.length;
+        num_cols = block_data[0].length;
+
+        data_size = num_rows * num_cols;
 
         contained_values = new HashSet<Integer>();
-        for (int r = 0; r < 3; r++)
+        for (int r = 0; r < num_rows; r++)
         {
-            for (int c = 0; c < 3; c++)
+            for (int c = 0; c < num_cols; c++)
             {
                 int to_add = block_data[r][c].get_value();
                 if (to_add == 0)
@@ -65,7 +70,13 @@ public class Block implements Iterable<Square> {
 
     public String toString()
     {
-        return "";
+        StringBuilder s = new StringBuilder();
+
+        Iterator<Square> iter = iterator();
+        while (iter.hasNext())
+            s.append(iter.next().get_value() + ", ");
+
+        return s.toString();
     }
 
     public Iterator<Square> iterator()

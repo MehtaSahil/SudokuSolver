@@ -70,6 +70,6 @@ public class MainPuzzle {
     public String toString()
     {
         /* could return any of the puzzle types */
-        return col_puzzle.toString();
+        return block_puzzle.toString();
     }
 }

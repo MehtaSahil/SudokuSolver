@@ -45,6 +45,12 @@ public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
     {
         private int current_index;
 
+        public AbstractVectorPuzzleIterator()
+        {
+            current_index = 0;
+        }
+
+
         @Override
         public boolean hasNext() {
             return current_index < vector_puzzle_data.length;

@@ -4,6 +4,7 @@ import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
 import SubPuzzles.RowPuzzle;
 
+import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -76,6 +77,8 @@ public class MainPuzzle {
      */
     private void quick_candidate_update(int row, int col, int assigned_value)
     {
+        Iterator<Square> iter;
+
         for (int c = 0; c < num_cols; c++)
         {
             standard_puzzle[row][c].remove_single_candidate(assigned_value);
@@ -86,15 +89,9 @@ public class MainPuzzle {
             standard_puzzle[r][col].remove_single_candidate(assigned_value);
         }
 
-        int hl_row = row / 3;
-        int hl_col = col / 3;
-        for (int r = 0; r < 3; r++)
-        {
-            for (int c = 0; c < 3; c++)
-            {
-                standard_puzzle[hl_row + r][hl_col + c].remove_single_candidate(assigned_value);
-            }
-        }
+        iter = block_puzzle.get_block(row / 3, col / 3).iterator();
+        while (iter.hasNext())
+            iter.next().remove_single_candidate(assigned_value);
     }
 
     /**

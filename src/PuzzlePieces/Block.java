@@ -2,16 +2,19 @@ package PuzzlePieces; /**
  * Created by sahil on 5/23/17.
  */
 
+import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Block {
+public class Block implements Iterable<Square>{
 
     /* "high level" row and col represents index of block in 3x3 matrix*/
     private final int hl_row;
     private final int hl_col;
 
     private Square[][] block_data;
+    private int data_size;
+
     private Set<Integer> contained_values;
 
     public Block(int hl_row, int hl_col, Square[][] init_data)
@@ -24,6 +27,8 @@ public class Block {
             throw new IllegalArgumentException("PuzzlePieces.Block Constructor: init_data must be 3x3");
 
         block_data = init_data;
+        data_size = block_data.length * block_data[0].length;
+
         contained_values = new HashSet<Integer>();
         for (int r = 0; r < 3; r++)
         {
@@ -61,5 +66,43 @@ public class Block {
     public String toString()
     {
         return "";
+    }
+
+    public Iterator<Square> iterator()
+    {
+        return new BlockIterator();
+    }
+
+    private class BlockIterator implements Iterator<Square>
+    {
+        private int current_row;
+        private int current_col;
+
+        public BlockIterator()
+        {
+            current_row = 0;
+            current_col = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return ((3*current_row)+current_col) < data_size;
+        }
+
+        @Override
+        public Square next() {
+            Square toReturn = block_data[current_row][current_col];
+            if (current_col + 1 >= 3)
+            {
+                current_row++;
+                current_col = 0;
+            }
+            else
+            {
+                current_col++;
+            }
+
+            return toReturn;
+        }
     }
 }

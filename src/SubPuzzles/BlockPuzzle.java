@@ -27,6 +27,10 @@ public class BlockPuzzle implements Iterable<Block> {
         init_block_puzzle_data(init_data);
     }
 
+    /**
+     * Creates blocks to represent input data
+     * @param init_data input data
+     */
     private void init_block_puzzle_data(Square[][] init_data)
     {
         for (int hl_row = 0; hl_row < 3; hl_row++)
@@ -62,6 +66,11 @@ public class BlockPuzzle implements Iterable<Block> {
         return toReturn;
     }
 
+    /**
+     * @param hl_row "high level" row index
+     * @param hl_col "high level" column index
+     * @return Block at the specified location
+     */
     public Block get_block(int hl_row, int hl_col)
     {
         return block_puzzle_data[hl_row][hl_col];
@@ -90,6 +99,10 @@ public class BlockPuzzle implements Iterable<Block> {
         return s.toString();
     }
 
+    /**
+     * @return An iterator which runs from the top left corner to
+     * the bottom right corner of block_puzzle_data[][]
+     */
     public Iterator<Block> iterator()
     {
         return new BlockPuzzleIterator();

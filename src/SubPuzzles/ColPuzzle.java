@@ -15,6 +15,10 @@ public class ColPuzzle extends AbstractVectorPuzzle {
         super(init_data);
     }
 
+    /**
+     * Creates column vectors
+     * @param init_data input data
+     */
     protected void init_puzzle_data(Square[][] init_data)
     {
         /* create a new PuzzlePieces.Vector for each col in init_data */

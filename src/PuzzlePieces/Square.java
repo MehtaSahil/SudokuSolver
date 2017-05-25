@@ -39,24 +39,10 @@ public class Square {
         this.col = col;
     }
 
-    /* Getters/Setters */
-    public Set<Integer> get_candidates()
-    {
-        return candidates;
-    }
-
-    public int get_final_candidate()
-    {
-        int to_return = 0;
-        for (int val : candidates)
-        {
-            to_return = val;
-            break;
-        }
-
-        return to_return;
-    }
-
+    /**
+     * Removes an entire Set of objects from candidates
+     * @param to_remove Set of objects to remove from candidates
+     */
     public void remove_candidates(Set<Integer> to_remove)
     {
         candidates.removeAll(to_remove);
@@ -73,6 +59,23 @@ public class Square {
             return 0;
 
         return value;
+    }
+
+    /* Getters/Setters */
+    public Set<Integer> get_candidates()
+    {
+        return candidates;
+    }
+
+    public int get_final_candidate()
+    {
+        int to_return = 0;
+        for (int val : candidates) {
+            to_return = val;
+            break;
+        }
+
+        return to_return;
     }
 
     public int get_row()

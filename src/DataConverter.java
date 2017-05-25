@@ -6,6 +6,11 @@ import PuzzlePieces.Square;
 
 public class DataConverter {
 
+    /**
+     * Converts int[][] input data to a Square[][]
+     * @param init_data int[][] input data
+     * @return Square[][] matrix used in analysis
+     */
     public static Square[][] convertMatrixToSquares(int[][] init_data)
     {
         int num_rows = init_data.length;

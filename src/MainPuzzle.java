@@ -15,6 +15,12 @@ import java.util.Set;
 
 public class MainPuzzle {
 
+    /**
+     * Different representations of the input data
+     * These types all point to the same underlying set of Square objects,
+     *      so changing data in one will change data in the others
+     *      In other words, they do NOT require extra maintenance
+     */
     private Square[][] standard_puzzle;
     private AbstractVectorPuzzle row_puzzle;
     private AbstractVectorPuzzle col_puzzle;
@@ -38,7 +44,11 @@ public class MainPuzzle {
 
     public void solve()
     {
-        /* Solve the puzzle! (lots more work to be done) */
+        /**
+         * Plan to have a list of AbstractProcesses through which we can just call .execute()
+         * This should lead to a really clean solving loop when more Processes come online
+         */
+
         AbstractProcess sole_candidate = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
         sole_candidate.execute();
     }
@@ -69,7 +79,7 @@ public class MainPuzzle {
 
     public String toString()
     {
-        /* could return any of the puzzle types */
+        /* could use any of the puzzle types */
         return block_puzzle.toString();
     }
 }

@@ -19,6 +19,11 @@ public class Block implements Iterable<Square> {
 
     private Set<Integer> contained_values;
 
+    /**
+     * @param hl_row "high level" row index
+     * @param hl_col "high level" column index
+     * @param init_data subset of main input data that represents data for THIS BLOCK ONLY (3x3)
+     */
     public Block(int hl_row, int hl_col, Square[][] init_data)
     {
         this.hl_row = hl_row;
@@ -48,6 +53,11 @@ public class Block implements Iterable<Square> {
         }
     }
 
+    /**
+     * @param sub_row row index within block
+     * @param sub_col column index within block
+     * @return integer value of Square at specified location within block
+     */
     public int get_value(int sub_row, int sub_col)
     {
         return block_data[sub_row][sub_col].get_value();
@@ -56,11 +66,6 @@ public class Block implements Iterable<Square> {
     public void add_to_contained_values(int to_add)
     {
         contained_values.add(to_add);
-    }
-
-    public Square[][] get_block_data()
-    {
-        return block_data;
     }
 
     public Set<Integer> get_contained_values()
@@ -79,6 +84,9 @@ public class Block implements Iterable<Square> {
         return s.toString();
     }
 
+    /**
+     * @return Iterator of Squares which runs from the top left to the bottom right corner
+     */
     public Iterator<Square> iterator()
     {
         return new BlockIterator();

@@ -33,11 +33,16 @@ public class SoleCandidate extends AbstractProcess {
     public void execute()
     {
         boolean execute_loop_trigger = true;
-        
+
         while (execute_loop_trigger)
             execute_loop_trigger = standard_sole_candidate();
     }
 
+    /**
+     * Considers every spot in the puzzle for a sole candidate
+     * updates the values of squares with sole candidates
+     * @return true if a change was made, false otherwise
+     */
     public boolean standard_sole_candidate()
     {
         boolean change_made = false;

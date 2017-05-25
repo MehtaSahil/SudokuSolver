@@ -15,6 +15,10 @@ public class RowPuzzle extends AbstractVectorPuzzle {
         super(init_data);
     }
 
+    /**
+     * Creates row vectors
+     * @param init_data input data
+     */
     protected void init_puzzle_data(Square[][] init_data)
     {
         /* create a new PuzzlePieces.Vector for each row in init_data */

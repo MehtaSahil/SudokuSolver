@@ -13,7 +13,6 @@ public class ColPuzzle extends AbstractVectorPuzzle {
     public ColPuzzle(Square[][] init_data)
     {
         super(init_data);
-        init_puzzle_data(init_data);
     }
 
     protected void init_puzzle_data(Square[][] init_data)

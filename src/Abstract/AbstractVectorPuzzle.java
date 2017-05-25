@@ -20,6 +20,7 @@ public abstract class AbstractVectorPuzzle {
             throw new IllegalArgumentException("SubPuzzles.RowPuzzle Constructor: init_data must be 9x9");
 
         vector_puzzle_data = new Vector[num_rows];
+        init_puzzle_data(init_data);
     }
 
     protected abstract void init_puzzle_data(Square[][] init_data);

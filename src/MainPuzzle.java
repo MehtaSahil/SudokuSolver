@@ -1,4 +1,3 @@
-import PuzzlePieces.Block;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;

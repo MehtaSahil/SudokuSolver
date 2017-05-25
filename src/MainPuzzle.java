@@ -88,7 +88,6 @@ public class MainPuzzle {
 
         int hl_row = row / 3;
         int hl_col = col / 3;
-        Block curr_block = block_puzzle.get_block(hl_row, hl_col);
         for (int r = 0; r < 3; r++)
         {
             for (int c = 0; c < 3; c++)
@@ -115,7 +114,7 @@ public class MainPuzzle {
         col_puzzle.get_vector(col).add_to_contained_values(new_value);
         block_puzzle.get_block(row / 3, col / 3).add_to_contained_values(new_value);
 
-        init_candidates();
+        quick_candidate_update(row, col, new_value);
     }
 
     public String toString()

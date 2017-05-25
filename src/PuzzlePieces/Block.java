@@ -29,7 +29,11 @@ public class Block {
         {
             for (int c = 0; c < 3; c++)
             {
-                contained_values.add(block_data[r][c].get_value());
+                int to_add = block_data[r][c].get_value();
+                if (to_add == 0)
+                    continue;
+
+                contained_values.add(to_add);
             }
         }
     }

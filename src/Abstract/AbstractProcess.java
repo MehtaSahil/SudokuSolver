@@ -13,14 +13,14 @@ import java.util.Iterator;
 
 public abstract class AbstractProcess {
 
-    private Square[][] standard_puzzle;
-    private RowPuzzle row_puzzle;
-    private ColPuzzle col_puzzle;
-    private BlockPuzzle block_puzzle;
+    protected Square[][] standard_puzzle;
+    protected AbstractVectorPuzzle row_puzzle;
+    protected AbstractVectorPuzzle col_puzzle;
+    protected BlockPuzzle block_puzzle;
 
     public AbstractProcess(Square[][] standard_puzzle,
-                           RowPuzzle row_puzzle,
-                           ColPuzzle col_puzzle,
+                           AbstractVectorPuzzle row_puzzle,
+                           AbstractVectorPuzzle col_puzzle,
                            BlockPuzzle block_puzzle)
     {
         this.standard_puzzle = standard_puzzle;

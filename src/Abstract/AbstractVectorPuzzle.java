@@ -3,10 +3,12 @@ package Abstract;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
 
+import java.util.Iterator;
+
 /**
  * Created by sahil on 5/24/17.
  */
-public abstract class AbstractVectorPuzzle {
+public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
     protected final int num_rows;
     protected final int num_cols;
     protected Vector[] vector_puzzle_data;
@@ -32,5 +34,25 @@ public abstract class AbstractVectorPuzzle {
     public Vector get_vector(int index)
     {
         return vector_puzzle_data[index];
+    }
+
+    public Iterator<Vector> iterator()
+    {
+        return new AbstractVectorPuzzleIterator();
+    }
+
+    private class AbstractVectorPuzzleIterator implements Iterator<Vector>
+    {
+        private int current_index;
+
+        @Override
+        public boolean hasNext() {
+            return current_index < vector_puzzle_data.length;
+        }
+
+        @Override
+        public Vector next() {
+            return vector_puzzle_data[current_index++];
+        }
     }
 }

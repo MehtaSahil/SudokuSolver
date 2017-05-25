@@ -1,3 +1,6 @@
+import Abstract.AbstractProcess;
+import Abstract.AbstractVectorPuzzle;
+import Processes.SoleCandidate;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
@@ -13,8 +16,8 @@ import java.util.Set;
 public class MainPuzzle {
 
     private Square[][] standard_puzzle;
-    private RowPuzzle row_puzzle;
-    private ColPuzzle col_puzzle;
+    private AbstractVectorPuzzle row_puzzle;
+    private AbstractVectorPuzzle col_puzzle;
     private BlockPuzzle block_puzzle;
 
     private int num_rows;
@@ -36,6 +39,8 @@ public class MainPuzzle {
     public void solve()
     {
         /* Solve the puzzle! (lots more work to be done) */
+        AbstractProcess sole_candidate = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
+        sole_candidate.execute();
     }
 
     /**

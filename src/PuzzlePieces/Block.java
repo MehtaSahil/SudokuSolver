@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Block implements Iterable<Square>{
+public class Block implements Iterable<Square> {
 
     /* "high level" row and col represents index of block in 3x3 matrix*/
     private final int hl_row;

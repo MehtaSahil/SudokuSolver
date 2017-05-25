@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 
-public class Vector implements Iterable<Square>{
+public class Vector implements Iterable<Square> {
 
     /**
      * vector_data holds the Squares present in the vector

@@ -1,3 +1,4 @@
+import PuzzlePieces.Block;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
@@ -29,7 +30,7 @@ public class MainPuzzle {
         num_rows = init_data.length;
         num_cols = init_data[0].length;
 
-        update_candidates();
+        init_candidates();
     }
 
     public void solve()
@@ -41,23 +42,58 @@ public class MainPuzzle {
      * Goes through every PuzzlePieces.Square and updates its availabe candidates
      * based on filled values in Row/Col/PuzzlePieces.Block Puzzles
      */
-    public void update_candidates()
+    private void init_candidates()
     {
         for (int r = 0; r < num_rows; r++)
         {
             for (int c = 0; c < num_cols; c++)
             {
-                Square temp = standard_puzzle[r][c];
-                Set<Integer> candidates = temp.get_candidates();
+                Square curr = standard_puzzle[r][c];
 
                 Set<Integer> vals_to_remove = row_puzzle.get_vector(r).get_contained_values();
-                candidates.removeAll(vals_to_remove);
+                curr.remove_candidates(vals_to_remove);
 
                 vals_to_remove = col_puzzle.get_vector(c).get_contained_values();
-                candidates.removeAll(vals_to_remove);
+                curr.remove_candidates(vals_to_remove);
 
                 vals_to_remove = block_puzzle.get_block(r / 3, c / 3).get_contained_values();
-                candidates.removeAll(vals_to_remove);
+                curr.remove_candidates(vals_to_remove);
+            }
+        }
+    }
+
+    /**
+     * Only updates the row, column, and block that would be affected by
+     * a value assignment at [row, col]. This means that not every spot
+     * on the puzzle needs to be touched because some of them are guaranteed
+     * to not have been affected.
+     *
+     * e.g. updating [4, 7] affects candidates on row 4, col 7, and block [1, 2]
+     *      but nowhere else (so dont touch anything you don't have to)
+     *
+     * @param row
+     * @param col
+     */
+    private void quick_candidate_update(int row, int col, int assigned_value)
+    {
+        for (int c = 0; c < num_cols; c++)
+        {
+            standard_puzzle[row][c].remove_single_candidate(assigned_value);
+        }
+
+        for (int r = 0; r < num_rows; r++)
+        {
+            standard_puzzle[r][col].remove_single_candidate(assigned_value);
+        }
+
+        int hl_row = row / 3;
+        int hl_col = col / 3;
+        Block curr_block = block_puzzle.get_block(hl_row, hl_col);
+        for (int r = 0; r < 3; r++)
+        {
+            for (int c = 0; c < 3; c++)
+            {
+                standard_puzzle[hl_row + r][hl_col + c].remove_single_candidate(assigned_value);
             }
         }
     }
@@ -79,7 +115,7 @@ public class MainPuzzle {
         col_puzzle.get_vector(col).add_to_contained_values(new_value);
         block_puzzle.get_block(row / 3, col / 3).add_to_contained_values(new_value);
 
-        update_candidates();
+        init_candidates();
     }
 
     public String toString()

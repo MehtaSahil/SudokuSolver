@@ -57,9 +57,9 @@ public class BlockPuzzle {
         return toReturn;
     }
 
-    public Block get_block(int sub_row, int sub_col)
+    public Block get_block(int hl_row, int hl_col)
     {
-        return block_puzzle_data[sub_row][sub_col];
+        return block_puzzle_data[hl_row][hl_col];
     }
 
     public String toString()

@@ -45,6 +45,16 @@ public class Square {
         return candidates;
     }
 
+    public void remove_candidates(Set<Integer> to_remove)
+    {
+        candidates.remove(to_remove);
+    }
+
+    public void remove_single_candidate(int to_remove)
+    {
+        candidates.remove(to_remove);
+    }
+
     public int get_value()
     {
         if (value == null)

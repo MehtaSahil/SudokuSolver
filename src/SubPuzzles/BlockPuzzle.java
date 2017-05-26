@@ -76,6 +76,13 @@ public class BlockPuzzle implements Iterable<Block> {
         return block_puzzle_data[hl_row][hl_col];
     }
 
+    public void update_candidate_counts()
+    {
+        Iterator<Block> iter = iterator();
+        while (iter.hasNext())
+            iter.next().update_candidate_counts();
+    }
+
     public String toString()
     {
         StringBuilder s = new StringBuilder();

@@ -5,6 +5,8 @@ package PuzzlePieces; /**
 import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.HashMap;
 
 public class Vector implements Iterable<Square> {
 
@@ -15,6 +17,7 @@ public class Vector implements Iterable<Square> {
      */
     private Square[] vector_data;
     private Set<Integer> contained_values;
+    private Map<Integer, Integer> candidate_counts;
 
     /**
      * copies a reference to a PuzzlePieces.Square[] (PuzzlePieces.Vector) into vector_data
@@ -28,9 +31,13 @@ public class Vector implements Iterable<Square> {
             throw new IllegalArgumentException("PuzzlePieces.Vector Constructor: init_data must be length 9");
 
         vector_data = init_data;
+
         contained_values = new HashSet<Integer>();
+        candidate_counts = new HashMap<Integer, Integer>();
+
         for (int i = 0; i < vector_data.length; i++)
         {
+            /* dealing with values of Squares */
             int to_add = vector_data[i].get_value();
             if (to_add == 0)
                 continue;
@@ -59,6 +66,34 @@ public class Vector implements Iterable<Square> {
     public Set<Integer> get_contained_values()
     {
         return contained_values;
+    }
+
+    public Map<Integer, Integer> get_candidate_counts()
+    {
+        return candidate_counts;
+    }
+
+    public void update_candidate_counts()
+    {
+        candidate_counts.clear();
+        Iterator<Square> iter = iterator();
+        while (iter.hasNext())
+        {
+            /* dealing with candidates within each Square */
+            Set<Integer> candidates = iter.next().get_candidates();
+            for (Integer num : candidates)
+            {
+                if (candidate_counts.containsKey(num))
+                {
+                    int new_value = candidate_counts.get(num) + 1;
+                    candidate_counts.put(num, new_value);
+                }
+                else
+                {
+                    candidate_counts.put(num, 1);
+                }
+            }
+        }
     }
 
     public String toString()

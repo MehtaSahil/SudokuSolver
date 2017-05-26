@@ -2,8 +2,6 @@ package Abstract;
 
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
-import SubPuzzles.ColPuzzle;
-import SubPuzzles.RowPuzzle;
 
 /**
  * Created by sahil on 5/25/17.
@@ -47,6 +45,14 @@ public abstract class AbstractProcess {
         block_puzzle.get_block(row / 3, col / 3).add_to_contained_values(new_value);
 
         quick_candidate_update(row, col, new_value);
+        update_candidate_counts();
+    }
+
+    private void update_candidate_counts()
+    {
+        row_puzzle.update_candidate_counts();
+        col_puzzle.update_candidate_counts();
+        block_puzzle.update_candidate_counts();
     }
 
     /**

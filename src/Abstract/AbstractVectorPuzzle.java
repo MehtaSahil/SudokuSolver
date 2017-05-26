@@ -27,6 +27,13 @@ public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
 
     protected abstract void init_puzzle_data(Square[][] init_data);
 
+    public void update_candidate_counts()
+    {
+        Iterator<Vector> iter = iterator();
+        while (iter.hasNext())
+            iter.next().update_candidate_counts();
+    }
+
     /**
      * @param index
      * @return PuzzlePieces.Vector at [index] in vector_puzzle_data

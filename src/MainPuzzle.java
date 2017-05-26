@@ -40,6 +40,7 @@ public class MainPuzzle {
         num_cols = init_data[0].length;
 
         init_candidates();
+        init_candidate_counts();
     }
 
     public void solve()
@@ -75,6 +76,13 @@ public class MainPuzzle {
                 curr.remove_candidates(vals_to_remove);
             }
         }
+    }
+
+    private void init_candidate_counts()
+    {
+        row_puzzle.update_candidate_counts();
+        col_puzzle.update_candidate_counts();
+        block_puzzle.update_candidate_counts();
     }
 
     public String toString()

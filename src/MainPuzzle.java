@@ -1,7 +1,9 @@
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
 import Processes.SoleCandidate;
+import Processes.UniqueCandidate;
 import PuzzlePieces.Square;
+import PuzzlePieces.Vector;
 import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
 import SubPuzzles.RowPuzzle;
@@ -50,8 +52,12 @@ public class MainPuzzle {
          * This should lead to a really clean solving loop when more Processes come online
          */
 
-        AbstractProcess sole_candidate = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
-        sole_candidate.execute();
+        AbstractProcess[] processes = new AbstractProcess[2];
+        processes[0] = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
+        processes[1] = new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
+
+        for (AbstractProcess proc : processes)
+            proc.execute();
     }
 
     /**

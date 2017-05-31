@@ -23,21 +23,11 @@ public class UniqueCandidate extends AbstractProcess {
         super(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
     }
 
-    @Override
-    public boolean execute() {
-        boolean process_change_made = false;
-
-        while (run_unique_candidate())
-            process_change_made = true;
-
-        return process_change_made;
-    }
-
     /**
      * executes unique candidate on rows, cols, and blocks
      * @return true if a change was made, false otherwise
      */
-    public boolean run_unique_candidate()
+    public boolean run_process()
     {
         boolean row_change = vector_unique_candidate(row_puzzle);
         boolean col_change = vector_unique_candidate(col_puzzle);

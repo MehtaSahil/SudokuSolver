@@ -20,26 +20,11 @@ public class SoleCandidate extends AbstractProcess {
     }
 
     /**
-     * Will run sole candidate until it cannot achieve any more progress
-     * At this point either the puzzle is solved or another method should be attempted
-     * after another method is attempted, sole candidate can be rune once again
-     */
-    public boolean execute()
-    {
-        boolean process_change_made = false;
-
-        while (run_sole_candidate())
-            process_change_made = true;
-
-        return process_change_made;
-    }
-
-    /**
      * Considers every spot in the puzzle for a sole candidate
      * updates the values of squares with sole candidates
      * @return true if a change was made, false otherwise
      */
-    public boolean run_sole_candidate()
+    public boolean run_process()
     {
         boolean change_made = false;
 

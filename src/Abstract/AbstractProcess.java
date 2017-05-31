@@ -88,5 +88,15 @@ public abstract class AbstractProcess {
      * runs the process as defined in the subclass
      * @return true if a change was made, false otherwise
      */
-    public abstract boolean execute();
+    public boolean execute()
+    {
+        boolean process_change_made = false;
+
+        while (run_process())
+            process_change_made = true;
+
+        return process_change_made;
+    }
+
+    public abstract boolean run_process();
 }

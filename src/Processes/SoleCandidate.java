@@ -2,18 +2,12 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
-import PuzzlePieces.Block;
 import PuzzlePieces.Square;
-import PuzzlePieces.Vector;
 import SubPuzzles.BlockPuzzle;
-import SubPuzzles.ColPuzzle;
-import SubPuzzles.RowPuzzle;
 
 /**
  * Created by sahil on 5/25/17.
  */
-
-import java.util.Iterator;
 
 public class SoleCandidate extends AbstractProcess {
 
@@ -34,17 +28,8 @@ public class SoleCandidate extends AbstractProcess {
     {
         boolean process_change_made = false;
 
-        while (true)
-        {
-            boolean curr_iter_change_made = standard_sole_candidate();
-
-            /* If a change was made, set process_change_made flag */
-            if (curr_iter_change_made)
-                process_change_made = true;
-
-            if (!curr_iter_change_made)
-                break;
-        }
+        while (run_sole_candidate())
+            process_change_made = true;
 
         return process_change_made;
     }
@@ -54,7 +39,7 @@ public class SoleCandidate extends AbstractProcess {
      * updates the values of squares with sole candidates
      * @return true if a change was made, false otherwise
      */
-    public boolean standard_sole_candidate()
+    public boolean run_sole_candidate()
     {
         boolean change_made = false;
 

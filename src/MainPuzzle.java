@@ -8,7 +8,9 @@ import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
 import SubPuzzles.RowPuzzle;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -51,9 +53,10 @@ public class MainPuzzle {
          * Plan to have a list of AbstractProcesses through which we can just call .execute()
          * This should lead to a really clean solving loop when more Processes come online
          */
-        AbstractProcess[] processes = new AbstractProcess[2];
-        processes[0] = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
-        processes[1] = new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
+
+        List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
+        processes.add(new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
+        processes.add(new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
 
         /* continue executing until none of the available processes can make a change */
         while (true)

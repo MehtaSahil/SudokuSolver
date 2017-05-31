@@ -29,11 +29,7 @@ public class UniqueCandidate extends AbstractProcess {
 
         while (true)
         {
-            boolean row_change = vector_unique_candidate(row_puzzle);
-            boolean col_change = vector_unique_candidate(col_puzzle);
-            boolean block_change = block_unique_candidate();
-
-            boolean curr_iter_change_made = row_change || col_change || block_change;
+            boolean curr_iter_change_made = unique_candidate();
 
             /* If a change was made, set process_change_made flag */
             if (curr_iter_change_made)
@@ -44,6 +40,19 @@ public class UniqueCandidate extends AbstractProcess {
         }
 
         return process_change_made;
+    }
+
+    /**
+     * executes unique candidate on rows, cols, and blocks
+     * @return true if a change was made, false otherwise
+     */
+    public boolean unique_candidate()
+    {
+        boolean row_change = vector_unique_candidate(row_puzzle);
+        boolean col_change = vector_unique_candidate(col_puzzle);
+        boolean block_change = block_unique_candidate();
+
+        return row_change || col_change || block_change;
     }
 
     /**

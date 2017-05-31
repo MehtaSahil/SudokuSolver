@@ -84,5 +84,9 @@ public abstract class AbstractProcess {
             iter.next().remove_single_candidate(assigned_value);
     }
 
+    /**
+     * runs the process as defined in the subclass
+     * @return true if a change was made, false otherwise
+     */
     public abstract boolean execute();
 }

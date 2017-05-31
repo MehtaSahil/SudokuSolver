@@ -84,5 +84,5 @@ public abstract class AbstractProcess {
             iter.next().remove_single_candidate(assigned_value);
     }
 
-    public abstract void execute();
+    public abstract boolean execute();
 }

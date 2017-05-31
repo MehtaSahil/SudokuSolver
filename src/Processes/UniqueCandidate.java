@@ -24,8 +24,9 @@ public class UniqueCandidate extends AbstractProcess {
     }
 
     @Override
-    public void execute() {
+    public boolean execute() {
         boolean execute_loop_trigger = true;
+        boolean change_made = false;
 
         while (execute_loop_trigger)
         {
@@ -34,7 +35,13 @@ public class UniqueCandidate extends AbstractProcess {
             boolean block_change = block_unique_candidate();
 
             execute_loop_trigger = row_change || col_change || block_change;
+
+            /* If a change was made, set change_made flag */
+            if (execute_loop_trigger)
+                change_made = true;
         }
+
+        return change_made;
     }
 
     /**

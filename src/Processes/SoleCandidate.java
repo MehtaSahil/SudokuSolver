@@ -30,12 +30,21 @@ public class SoleCandidate extends AbstractProcess {
      * At this point either the puzzle is solved or another method should be attempted
      * after another method is attempted, sole candidate can be rune once again
      */
-    public void execute()
+    public boolean execute()
     {
         boolean execute_loop_trigger = true;
+        boolean change_made = false;
 
         while (execute_loop_trigger)
+        {
             execute_loop_trigger = standard_sole_candidate();
+
+            /* If a change was made, set change_made flag */
+            if (execute_loop_trigger)
+                change_made = true;
+        }
+
+        return change_made;
     }
 
     /**

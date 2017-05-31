@@ -9,6 +9,8 @@ public class Square {
 
     /* Stores options for the true value */
     private Set<Integer> candidates;
+
+    /* value is null if not assigned */
     private Integer value;
 
     /* Stores location of square in puzzle */
@@ -18,10 +20,7 @@ public class Square {
     public Square(int row, int col, int init_val)
     {
         /* initialize value to blank (null) or prefilled value */
-        if (init_val < 1 || init_val > 9)
-            value = null;
-        else
-            value = init_val;
+        value = (init_val < 1 || init_val > 9) ? null : init_val;
 
         candidates = new HashSet<Integer>();
 
@@ -67,6 +66,7 @@ public class Square {
         return candidates;
     }
 
+    /* TODO : use iterator to get final candidate from Set */
     public int get_final_candidate()
     {
         int to_return = 0;
@@ -76,6 +76,11 @@ public class Square {
         }
 
         return to_return;
+    }
+
+    public boolean is_assigned()
+    {
+        return (value != null);
     }
 
     public int get_row()

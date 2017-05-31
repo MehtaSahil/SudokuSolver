@@ -51,13 +51,24 @@ public class MainPuzzle {
          * Plan to have a list of AbstractProcesses through which we can just call .execute()
          * This should lead to a really clean solving loop when more Processes come online
          */
-
         AbstractProcess[] processes = new AbstractProcess[2];
         processes[0] = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
         processes[1] = new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
 
-        for (AbstractProcess proc : processes)
-            proc.execute();
+        /* continue executing until none of the available methods can make a change */
+        boolean execute_loop_trigger = true;
+        while (execute_loop_trigger)
+        {
+            execute_loop_trigger = false;
+
+            /* will set execute_loop_trigger to true if a change was made */
+            for (AbstractProcess proc : processes)
+                execute_loop_trigger |= proc.execute();
+
+            /* stop trying to solve if puzzle is already solved */
+            if (is_puzzle_solved())
+                break;
+        }
     }
 
     /**
@@ -89,6 +100,24 @@ public class MainPuzzle {
         row_puzzle.update_candidate_counts();
         col_puzzle.update_candidate_counts();
         block_puzzle.update_candidate_counts();
+    }
+
+    /* true if the puzzle has been solved, false otherwise */
+    public boolean is_puzzle_solved()
+    {
+        /* go through all Squares in puzzle */
+        Iterator<Vector> vector_iter = row_puzzle.iterator();
+        while (vector_iter.hasNext())
+        {
+            Iterator<Square> square_iter = vector_iter.next().iterator();
+            while (square_iter.hasNext())
+            {
+                if (!square_iter.next().is_assigned())
+                    return false;
+            }
+        }
+
+        return true;
     }
 
     public String toString()

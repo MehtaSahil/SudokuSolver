@@ -36,7 +36,7 @@ public class SoleCandidate extends AbstractProcess {
                 int current_row = current.get_row();
                 int current_col = current.get_col();
 
-                if (current.get_candidates().size() == 1)
+                if (current.has_one_candidate())
                 {
                     set_value(current_row, current_col, current.get_final_candidate());
                     change_made = true;

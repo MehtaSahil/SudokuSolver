@@ -66,21 +66,19 @@ public class Square {
         return candidates;
     }
 
-    /* TODO : use iterator to get final candidate from Set */
     public int get_final_candidate()
     {
-        int to_return = 0;
-        for (int val : candidates) {
-            to_return = val;
-            break;
-        }
-
-        return to_return;
+        return candidates.iterator().next();
     }
 
     public boolean is_assigned()
     {
         return (value != null);
+    }
+
+    public boolean has_one_candidate()
+    {
+        return candidates.size() == 1;
     }
 
     public int get_row()

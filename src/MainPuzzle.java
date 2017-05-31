@@ -55,15 +55,17 @@ public class MainPuzzle {
         processes[0] = new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
         processes[1] = new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
 
-        /* continue executing until none of the available methods can make a change */
-        boolean execute_loop_trigger = true;
-        while (execute_loop_trigger)
+        /* continue executing until none of the available processes can make a change */
+        while (true)
         {
-            execute_loop_trigger = false;
+            boolean curr_iter_change_made = false;
 
-            /* will set execute_loop_trigger to true if a change was made */
+            /* will set curr_iter_change_made to true if a change was made */
             for (AbstractProcess proc : processes)
-                execute_loop_trigger |= proc.execute();
+                curr_iter_change_made |= proc.execute();
+
+            if (!curr_iter_change_made)
+                break;
 
             /* stop trying to solve if puzzle is already solved */
             if (is_puzzle_solved())

@@ -32,19 +32,21 @@ public class SoleCandidate extends AbstractProcess {
      */
     public boolean execute()
     {
-        boolean execute_loop_trigger = true;
-        boolean change_made = false;
+        boolean process_change_made = false;
 
-        while (execute_loop_trigger)
+        while (true)
         {
-            execute_loop_trigger = standard_sole_candidate();
+            boolean curr_iter_change_made = standard_sole_candidate();
 
-            /* If a change was made, set change_made flag */
-            if (execute_loop_trigger)
-                change_made = true;
+            /* If a change was made, set process_change_made flag */
+            if (curr_iter_change_made)
+                process_change_made = true;
+
+            if (!curr_iter_change_made)
+                break;
         }
 
-        return change_made;
+        return process_change_made;
     }
 
     /**

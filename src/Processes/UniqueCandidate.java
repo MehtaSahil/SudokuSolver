@@ -25,23 +25,25 @@ public class UniqueCandidate extends AbstractProcess {
 
     @Override
     public boolean execute() {
-        boolean execute_loop_trigger = true;
-        boolean change_made = false;
+        boolean process_change_made = false;
 
-        while (execute_loop_trigger)
+        while (true)
         {
             boolean row_change = vector_unique_candidate(row_puzzle);
             boolean col_change = vector_unique_candidate(col_puzzle);
             boolean block_change = block_unique_candidate();
 
-            execute_loop_trigger = row_change || col_change || block_change;
+            boolean curr_iter_change_made = row_change || col_change || block_change;
 
-            /* If a change was made, set change_made flag */
-            if (execute_loop_trigger)
-                change_made = true;
+            /* If a change was made, set process_change_made flag */
+            if (curr_iter_change_made)
+                process_change_made = true;
+
+            if (!curr_iter_change_made)
+                break;
         }
 
-        return change_made;
+        return process_change_made;
     }
 
     /**

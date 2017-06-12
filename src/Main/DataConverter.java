@@ -1,3 +1,5 @@
+package Main;
+
 import PuzzlePieces.Square;
 
 /**
@@ -17,7 +19,7 @@ public class DataConverter {
         int num_cols = init_data[0].length;
 
         if (num_rows != num_cols || num_rows != 9)
-            throw new IllegalArgumentException("DataConverter Constructor: init_data must be 9x9");
+            throw new IllegalArgumentException("Main.DataConverter Constructor: init_data must be 9x9");
 
         /**
          * create matrix of Squares with identical data

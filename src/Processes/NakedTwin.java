@@ -2,6 +2,7 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Main.PuzzleContainer;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
 import SubPuzzles.BlockPuzzle;
@@ -16,13 +17,7 @@ import java.util.Set;
 
 public class NakedTwin extends AbstractProcess {
 
-    public NakedTwin(Square[][] standard_puzzle,
-                     AbstractVectorPuzzle row_puzzle,
-                     AbstractVectorPuzzle col_puzzle,
-                     BlockPuzzle block_puzzle)
-    {
-        super(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
-    }
+    public NakedTwin(PuzzleContainer pc) { super(pc); }
 
     /**
      * Considers each block as an exposed pairing of candidates

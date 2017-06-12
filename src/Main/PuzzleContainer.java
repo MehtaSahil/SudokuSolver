@@ -1,3 +1,5 @@
+package Main;
+
 import Abstract.AbstractVectorPuzzle;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;

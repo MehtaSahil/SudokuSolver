@@ -1,5 +1,6 @@
 package Abstract;
 
+import Main.PuzzleContainer;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 
@@ -16,15 +17,12 @@ public abstract class AbstractProcess {
     protected AbstractVectorPuzzle col_puzzle;
     protected BlockPuzzle block_puzzle;
 
-    public AbstractProcess(Square[][] standard_puzzle,
-                           AbstractVectorPuzzle row_puzzle,
-                           AbstractVectorPuzzle col_puzzle,
-                           BlockPuzzle block_puzzle)
+    public AbstractProcess(PuzzleContainer pc)
     {
-        this.standard_puzzle = standard_puzzle;
-        this.row_puzzle = row_puzzle;
-        this.col_puzzle = col_puzzle;
-        this.block_puzzle = block_puzzle;
+        this.standard_puzzle = pc.standard_puzzle;
+        this.row_puzzle = pc.row_puzzle;
+        this.col_puzzle = pc.col_puzzle;
+        this.block_puzzle = pc.block_puzzle;
     }
 
     /**

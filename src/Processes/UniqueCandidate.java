@@ -2,6 +2,7 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Main.PuzzleContainer;
 import PuzzlePieces.Block;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
@@ -15,14 +16,7 @@ import java.util.Set;
  */
 public class UniqueCandidate extends AbstractProcess {
 
-    public UniqueCandidate(Square[][] standard_puzzle,
-                         AbstractVectorPuzzle row_puzzle,
-                         AbstractVectorPuzzle col_puzzle,
-                         BlockPuzzle block_puzzle)
-    {
-        super(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
-    }
-
+    public UniqueCandidate(PuzzleContainer pc) { super(pc); }
     /**
      * executes unique candidate on rows, cols, and blocks
      * @return true if a change was made, false otherwise

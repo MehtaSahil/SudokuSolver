@@ -2,6 +2,7 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Main.PuzzleContainer;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 
@@ -11,13 +12,7 @@ import SubPuzzles.BlockPuzzle;
 
 public class SoleCandidate extends AbstractProcess {
 
-    public SoleCandidate(Square[][] standard_puzzle,
-                         AbstractVectorPuzzle row_puzzle,
-                         AbstractVectorPuzzle col_puzzle,
-                         BlockPuzzle block_puzzle)
-    {
-        super(standard_puzzle, row_puzzle, col_puzzle, block_puzzle);
-    }
+    public SoleCandidate(PuzzleContainer pc) { super(pc); }
 
     /**
      * Considers every spot in the puzzle for a sole candidate

@@ -1,13 +1,11 @@
+package Main;
+
 import Abstract.AbstractProcess;
-import Abstract.AbstractVectorPuzzle;
 import Processes.NakedTwin;
 import Processes.SoleCandidate;
 import Processes.UniqueCandidate;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
-import SubPuzzles.BlockPuzzle;
-import SubPuzzles.ColPuzzle;
-import SubPuzzles.RowPuzzle;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,11 +24,6 @@ public class Solver {
      *      so changing data in one will change data in the others
      *      In other words, they do NOT require extra maintenance
      */
-//    private Square[][] standard_puzzle;
-//    private AbstractVectorPuzzle row_puzzle;
-//    private AbstractVectorPuzzle col_puzzle;
-//    private BlockPuzzle block_puzzle;
-
     PuzzleContainer pc;
 
     private int num_rows;
@@ -38,11 +31,6 @@ public class Solver {
 
     public Solver(Square[][] init_data)
     {
-//        standard_puzzle = init_data;
-//        row_puzzle = new RowPuzzle(init_data);
-//        col_puzzle = new ColPuzzle(init_data);
-//        block_puzzle = new BlockPuzzle(init_data);
-
         pc = new PuzzleContainer(init_data);
 
         num_rows = init_data.length;
@@ -60,9 +48,9 @@ public class Solver {
          */
 
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
-        processes.add(new SoleCandidate(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
-        processes.add(new UniqueCandidate(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
-        processes.add(new NakedTwin(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
+        processes.add(new SoleCandidate(pc));
+        processes.add(new UniqueCandidate(pc));
+        processes.add(new NakedTwin(pc));
 
         /* continue executing until none of the available processes can make a change */
         while (true)

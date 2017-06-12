@@ -26,20 +26,24 @@ public class Solver {
      *      so changing data in one will change data in the others
      *      In other words, they do NOT require extra maintenance
      */
-    private Square[][] standard_puzzle;
-    private AbstractVectorPuzzle row_puzzle;
-    private AbstractVectorPuzzle col_puzzle;
-    private BlockPuzzle block_puzzle;
+//    private Square[][] standard_puzzle;
+//    private AbstractVectorPuzzle row_puzzle;
+//    private AbstractVectorPuzzle col_puzzle;
+//    private BlockPuzzle block_puzzle;
+
+    PuzzleContainer pc;
 
     private int num_rows;
     private int num_cols;
 
     public Solver(Square[][] init_data)
     {
-        standard_puzzle = init_data;
-        row_puzzle = new RowPuzzle(init_data);
-        col_puzzle = new ColPuzzle(init_data);
-        block_puzzle = new BlockPuzzle(init_data);
+//        standard_puzzle = init_data;
+//        row_puzzle = new RowPuzzle(init_data);
+//        col_puzzle = new ColPuzzle(init_data);
+//        block_puzzle = new BlockPuzzle(init_data);
+
+        pc = new PuzzleContainer(init_data);
 
         num_rows = init_data.length;
         num_cols = init_data[0].length;
@@ -56,9 +60,9 @@ public class Solver {
          */
 
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
-        processes.add(new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
-        processes.add(new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
-        processes.add(new NakedTwin(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
+        processes.add(new SoleCandidate(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
+        processes.add(new UniqueCandidate(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
+        processes.add(new NakedTwin(pc.standard_puzzle, pc.row_puzzle, pc.col_puzzle, pc.block_puzzle));
 
         /* continue executing until none of the available processes can make a change */
         while (true)
@@ -91,15 +95,15 @@ public class Solver {
         {
             for (int c = 0; c < num_cols; c++)
             {
-                Square curr = standard_puzzle[r][c];
+                Square curr = pc.standard_puzzle[r][c];
 
-                Set<Integer> vals_to_remove = row_puzzle.get_vector(r).get_contained_values();
+                Set<Integer> vals_to_remove = pc.row_puzzle.get_vector(r).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
 
-                vals_to_remove = col_puzzle.get_vector(c).get_contained_values();
+                vals_to_remove = pc.col_puzzle.get_vector(c).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
 
-                vals_to_remove = block_puzzle.get_block(r / 3, c / 3).get_contained_values();
+                vals_to_remove = pc.block_puzzle.get_block(r / 3, c / 3).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
             }
         }
@@ -107,16 +111,16 @@ public class Solver {
 
     private void init_candidate_counts()
     {
-        row_puzzle.update_candidate_counts();
-        col_puzzle.update_candidate_counts();
-        block_puzzle.update_candidate_counts();
+        pc.row_puzzle.update_candidate_counts();
+        pc.col_puzzle.update_candidate_counts();
+        pc.block_puzzle.update_candidate_counts();
     }
 
     /* true if the puzzle has been solved, false otherwise */
     public boolean is_puzzle_solved()
     {
         /* go through all Squares in puzzle */
-        Iterator<Vector> vector_iter = row_puzzle.iterator();
+        Iterator<Vector> vector_iter = pc.row_puzzle.iterator();
         while (vector_iter.hasNext())
         {
             Iterator<Square> square_iter = vector_iter.next().iterator();
@@ -133,6 +137,6 @@ public class Solver {
     public String toString()
     {
         /* could use any of the puzzle types */
-        return block_puzzle.toString();
+        return pc.block_puzzle.toString();
     }
 }

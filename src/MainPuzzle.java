@@ -1,5 +1,6 @@
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Processes.NakedTwin;
 import Processes.SoleCandidate;
 import Processes.UniqueCandidate;
 import PuzzlePieces.Square;
@@ -57,16 +58,20 @@ public class MainPuzzle {
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
         processes.add(new SoleCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
         processes.add(new UniqueCandidate(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
+        processes.add(new NakedTwin(standard_puzzle, row_puzzle, col_puzzle, block_puzzle));
 
         /* continue executing until none of the available processes can make a change */
         while (true)
         {
+            System.out.println("new process runthrough");
+
             boolean curr_iter_change_made = false;
 
             /* will set curr_iter_change_made to true if a change was made */
             for (AbstractProcess proc : processes)
                 curr_iter_change_made |= proc.execute();
 
+            /* if a change was not made after running all of the processes, stop */
             if (!curr_iter_change_made)
                 break;
 

@@ -64,6 +64,8 @@ public abstract class AbstractProcess {
      * e.g. updating [4, 7] affects candidates on row 4, col 7, and block [1, 2]
      *      but nowhere else (so dont touch anything you don't have to)
      *
+     * Does NOT assign the value passed to [row, col]
+     *
      * @param row
      * @param col
      */

@@ -18,7 +18,7 @@ import java.util.Set;
  * Created by sahil on 5/23/17.
  */
 
-public class MainPuzzle {
+public class Solver {
 
     /**
      * Different representations of the input data
@@ -34,7 +34,7 @@ public class MainPuzzle {
     private int num_rows;
     private int num_cols;
 
-    public MainPuzzle(Square[][] init_data)
+    public Solver(Square[][] init_data)
     {
         standard_puzzle = init_data;
         row_puzzle = new RowPuzzle(init_data);

@@ -4,7 +4,7 @@ import PuzzlePieces.Square;
  * Created by sahil on 5/23/17.
  */
 
-public class Runner {
+public class Main {
     public static void main(String[] args)
     {
         // main runner code will go
@@ -29,7 +29,7 @@ public class Runner {
                         {0, 0, 0, 3, 0, 6, 0, 9, 0}};
 
         Square[][] init_data = DataConverter.convertMatrixToSquares(input);
-        MainPuzzle p = new MainPuzzle(init_data);
+        Solver p = new Solver(init_data);
         System.out.println(p);
         p.solve();
         System.out.println(p);

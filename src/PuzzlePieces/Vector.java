@@ -21,7 +21,7 @@ public class Vector implements Iterable<Square> {
 
     /**
      * copies a reference to a PuzzlePieces.Square[] (PuzzlePieces.Vector) into vector_data
-     * initializes contained_values (used to maintain MainPuzzle)
+     * initializes contained_values (used to maintain Solver)
      * @param init_data
      */
     public Vector(Square[] init_data)

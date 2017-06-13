@@ -3,8 +3,10 @@ package Processes;
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
 import Main.PuzzleContainer;
+import PuzzlePieces.Block;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
+import SubPuzzles.BlockPuzzle;
 
 import java.util.*;
 
@@ -26,52 +28,18 @@ public class NakedTwin extends AbstractProcess {
     {
         boolean change_made = false;
 
-//        /* checking for exposed pairs on rows */
-//        Iterator<Vector> row_iterator = col_puzzle.iterator();
-//        while (row_iterator.hasNext())
-//        {
-//            System.out.println("new row");
-//            Vector current_row = row_iterator.next();
-//
-//            Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
-//
-//            /* Iterate through all Squares in current vector */
-//            Iterator<Square> square_iterator = current_row.iterator();
-//            while (square_iterator.hasNext())
-//            {
-//                Square current_square = square_iterator.next();
-//                Set<Integer> current_candidates = current_square.get_candidates();
-//
-//                /* If we're not considering a PAIR, move on */
-//                if (current_square.is_assigned() || current_candidates.size() != 2)
-//                {
-//                    continue;
-//                }
-//
-//                if (!set_counts.containsKey(current_candidates))
-//                {
-//                    set_counts.put(current_candidates, 1);
-//                }
-//                else
-//                {
-//                    set_counts.put(current_candidates, set_counts.get(current_candidates) + 1);
-//                }
-//            }
-//
-//            System.out.println(set_counts);
-//        }
+        List<Map<Set<Integer>, Integer>> row_candidate_counts = get_vector_set_counts(row_puzzle);
+        List<Map<Set<Integer>, Integer>> col_candidate_counts = get_vector_set_counts(col_puzzle);
+        List<Map<Set<Integer>, Integer>> block_candidate_counts = get_block_set_counts(block_puzzle);
 
-        System.out.println(get_set_counts(row_puzzle));
-        System.out.println(get_set_counts(col_puzzle));
-
-        /* checking for exposed pairs in columns */
-
-        /* checking for exposed pairs in blocks */
+        System.out.println(row_candidate_counts);
+        System.out.println(col_candidate_counts);
+        System.out.println(block_candidate_counts);
 
         return change_made;
     }
 
-    public List<Map<Set<Integer>, Integer>> get_set_counts(AbstractVectorPuzzle puzzle)
+    public List<Map<Set<Integer>, Integer>> get_vector_set_counts(AbstractVectorPuzzle puzzle)
     {
         List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
 
@@ -106,7 +74,47 @@ public class NakedTwin extends AbstractProcess {
                 }
             }
 
-            // System.out.println(set_counts);
+            toReturn.add(set_counts);
+        }
+
+        return toReturn;
+    }
+
+    public List<Map<Set<Integer>, Integer>> get_block_set_counts(BlockPuzzle puzzle)
+    {
+        List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
+
+        /* checking for exposed pairs on rows */
+        Iterator<Block> block_iterator = puzzle.iterator();
+        while (block_iterator.hasNext())
+        {
+            Block current_block = block_iterator.next();
+
+            Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
+
+            /* Iterate through all Squares in current vector */
+            Iterator<Square> square_iterator = current_block.iterator();
+            while (square_iterator.hasNext())
+            {
+                Square current_square = square_iterator.next();
+                Set<Integer> current_candidates = current_square.get_candidates();
+
+                /* If we're not considering a PAIR, move on */
+                if (current_square.is_assigned() || current_candidates.size() != 2)
+                {
+                    continue;
+                }
+
+                if (!set_counts.containsKey(current_candidates))
+                {
+                    set_counts.put(current_candidates, 1);
+                }
+                else
+                {
+                    set_counts.put(current_candidates, set_counts.get(current_candidates) + 1);
+                }
+            }
+
             toReturn.add(set_counts);
         }
 

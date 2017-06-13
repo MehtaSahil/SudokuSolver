@@ -5,11 +5,8 @@ import Abstract.AbstractVectorPuzzle;
 import Main.PuzzleContainer;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
-import SubPuzzles.BlockPuzzle;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by sahil on 6/11/17.
@@ -29,15 +26,62 @@ public class NakedTwin extends AbstractProcess {
     {
         boolean change_made = false;
 
+//        /* checking for exposed pairs on rows */
+//        Iterator<Vector> row_iterator = col_puzzle.iterator();
+//        while (row_iterator.hasNext())
+//        {
+//            System.out.println("new row");
+//            Vector current_row = row_iterator.next();
+//
+//            Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
+//
+//            /* Iterate through all Squares in current vector */
+//            Iterator<Square> square_iterator = current_row.iterator();
+//            while (square_iterator.hasNext())
+//            {
+//                Square current_square = square_iterator.next();
+//                Set<Integer> current_candidates = current_square.get_candidates();
+//
+//                /* If we're not considering a PAIR, move on */
+//                if (current_square.is_assigned() || current_candidates.size() != 2)
+//                {
+//                    continue;
+//                }
+//
+//                if (!set_counts.containsKey(current_candidates))
+//                {
+//                    set_counts.put(current_candidates, 1);
+//                }
+//                else
+//                {
+//                    set_counts.put(current_candidates, set_counts.get(current_candidates) + 1);
+//                }
+//            }
+//
+//            System.out.println(set_counts);
+//        }
+
+        System.out.println(get_set_counts(row_puzzle));
+        System.out.println(get_set_counts(col_puzzle));
+
+        /* checking for exposed pairs in columns */
+
+        /* checking for exposed pairs in blocks */
+
+        return change_made;
+    }
+
+    public List<Map<Set<Integer>, Integer>> get_set_counts(AbstractVectorPuzzle puzzle)
+    {
+        List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
+
         /* checking for exposed pairs on rows */
-        Iterator<Vector> row_iterator = row_puzzle.iterator();
+        Iterator<Vector> row_iterator = puzzle.iterator();
         while (row_iterator.hasNext())
         {
-            System.out.println("new row");
-
             Vector current_row = row_iterator.next();
 
-            Set<Set<Integer>> seen_candidate_sets = new HashSet<Set<Integer>>();
+            Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
 
             /* Iterate through all Squares in current vector */
             Iterator<Square> square_iterator = current_row.iterator();
@@ -52,31 +96,23 @@ public class NakedTwin extends AbstractProcess {
                     continue;
                 }
 
-                System.out.println("Found a pair!");
-                System.out.println(current_candidates);
-
-//                if (seen_candidate_sets.contains(current_candidates))
-//                {
-//                    /* do removal of candidates */
-//                    /* remove current_candidates from seen_candidate_sets */
-//                    adjust_for_pair_row(current_candidates, current_row);
-//                    seen_candidate_sets.remove(current_candidates);
-//                    change_made = true;
-//                }
-//                else
-//                {
-//                    /* add current_candidates to seen_candiate_sets for future comparison */
-//                    seen_candidate_sets.add(current_candidates);
-//                }
+                if (!set_counts.containsKey(current_candidates))
+                {
+                    set_counts.put(current_candidates, 1);
+                }
+                else
+                {
+                    set_counts.put(current_candidates, set_counts.get(current_candidates) + 1);
+                }
             }
+
+            // System.out.println(set_counts);
+            toReturn.add(set_counts);
         }
 
-        /* checking for exposed pairs in columns */
-
-        /* checking for exposed pairs in blocks */
-
-        return change_made;
+        return toReturn;
     }
+
 
     /**
      * Removes the candidates found in pair_candidates from all Squares in the specified

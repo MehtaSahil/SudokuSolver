@@ -33,13 +33,46 @@ public class NakedTwin extends AbstractProcess {
         List<Map<Set<Integer>, Integer>> block_candidate_counts = get_block_set_counts(block_puzzle);
 
         System.out.println(row_candidate_counts);
-        System.out.println(col_candidate_counts);
-        System.out.println(block_candidate_counts);
+//        System.out.println(col_candidate_counts);
+//        System.out.println(block_candidate_counts);
+
+        for (int row = 0; row < row_candidate_counts.size(); row++)
+        {
+            Map<Set<Integer>, Integer> current_map = row_candidate_counts.get(row);
+            System.out.println(current_map);
+
+            for (Set<Integer> pair : current_map.keySet())
+            {
+                System.out.println(current_map.containsKey(pair) + " : " + current_map.keySet() + " : " + pair);
+
+                if (current_map.get(pair) == 2)
+                {
+                    System.out.println("naked twin: " + pair + "on row : " + row);
+                    remove_naked_twin_candidates(pair, row_puzzle.get_vector(row));
+                }
+            }
+        }
 
         return change_made;
     }
 
-    public List<Map<Set<Integer>, Integer>> get_vector_set_counts(AbstractVectorPuzzle puzzle)
+    private void remove_naked_twin_candidates(Set<Integer> pair, Vector row)
+    {
+        Iterator<Square> vector_iterator = row.iterator();
+        while (vector_iterator.hasNext())
+        {
+            Square current_square = vector_iterator.next();
+
+            if (current_square.is_assigned() || current_square.get_candidates().equals(pair))
+            {
+                continue;
+            }
+
+            current_square.remove_candidates(pair);
+        }
+    }
+
+    private List<Map<Set<Integer>, Integer>> get_vector_set_counts(AbstractVectorPuzzle puzzle)
     {
         List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
 
@@ -56,7 +89,7 @@ public class NakedTwin extends AbstractProcess {
             while (square_iterator.hasNext())
             {
                 Square current_square = square_iterator.next();
-                Set<Integer> current_candidates = current_square.get_candidates();
+                Set<Integer> current_candidates = new HashSet<Integer>(current_square.get_candidates());
 
                 /* If we're not considering a PAIR, move on */
                 if (current_square.is_assigned() || current_candidates.size() != 2)
@@ -80,7 +113,7 @@ public class NakedTwin extends AbstractProcess {
         return toReturn;
     }
 
-    public List<Map<Set<Integer>, Integer>> get_block_set_counts(BlockPuzzle puzzle)
+    private List<Map<Set<Integer>, Integer>> get_block_set_counts(BlockPuzzle puzzle)
     {
         List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
 
@@ -119,27 +152,5 @@ public class NakedTwin extends AbstractProcess {
         }
 
         return toReturn;
-    }
-
-
-    /**
-     * Removes the candidates found in pair_candidates from all Squares in the specified
-     * row EXCEPT for those that contain the found pair
-     * @param pair_candidates
-     * @param row
-     */
-    private void adjust_for_pair_row(Set<Integer> pair_candidates, Vector row)
-    {
-        Iterator<Square> iter = row.iterator();
-        while (iter.hasNext())
-        {
-            Square current_square = iter.next();
-
-            /* don't remove pair candidates from the Squares that contain the actual pair */
-            if (current_square.get_candidates().equals(pair_candidates))
-                continue;
-
-            current_square.remove_candidates(pair_candidates);
-        }
     }
 }

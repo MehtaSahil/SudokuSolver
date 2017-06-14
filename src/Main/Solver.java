@@ -56,7 +56,6 @@ public class Solver {
         while (true)
         {
             System.out.println("new process runthrough");
-            System.out.println(toString());
 
             boolean curr_iter_change_made = false;
 

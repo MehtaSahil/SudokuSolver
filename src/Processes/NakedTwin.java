@@ -36,7 +36,7 @@ public class NakedTwin extends AbstractProcess {
         change_made |= vector_detect_naked_twin(col_candidate_counts, col_puzzle);
         change_made |= block_detect_naked_twin(block_candidate_counts, block_puzzle);
 
-        return change_made;
+        return false;
     }
 
     private boolean vector_detect_naked_twin(List<Map<Set<Integer>, Integer>> vector_candidate_counts,

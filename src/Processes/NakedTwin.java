@@ -52,7 +52,6 @@ public class NakedTwin extends AbstractProcess {
             {
                 if (current_map.get(pair) == 2)
                 {
-                    System.out.println("naked twin: " + pair + "on row : " + row);
                     vector_remove_naked_twin_candidates(pair, puzzle.get_vector(row));
                     change_made = true;
                 }
@@ -75,7 +74,6 @@ public class NakedTwin extends AbstractProcess {
             {
                 if (current_map.get(pair) == 2)
                 {
-                    System.out.println("naked twin: " + pair + "on block : " + block);
                     block_remove_naked_twin_candidates(pair, puzzle.get_block(block/3, block%3));
                     change_made = true;
                 }

@@ -2,13 +2,15 @@ package PuzzlePieces; /**
  * Created by sahil on 5/23/17.
  */
 
+import Abstract.IBuildingBlock;
+
 import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Vector implements Iterable<Square> {
+public class Vector implements IBuildingBlock, Iterable<Square> {
 
     /**
      * vector_data holds the Squares present in the vector
@@ -50,7 +52,7 @@ public class Vector implements Iterable<Square> {
      * @param index
      * @return Integer value of the PuzzlePieces.Square at [index] in vector_data
      */
-    public int get_value(int index)
+    public int get_value_at_index(int index)
     {
         if (index > vector_data.length)
             throw new IllegalArgumentException("PuzzlePieces.Vector index out of bounds");

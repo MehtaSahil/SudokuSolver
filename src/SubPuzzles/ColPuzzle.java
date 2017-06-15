@@ -19,7 +19,7 @@ public class ColPuzzle extends AbstractVectorPuzzle {
      * Creates column vectors
      * @param init_data input data
      */
-    protected void init_puzzle_data(Square[][] init_data)
+    public void init_puzzle_data(Square[][] init_data)
     {
         /* create a new PuzzlePieces.Vector for each col in init_data */
         for (int c = 0; c < num_cols; c++)
@@ -42,7 +42,7 @@ public class ColPuzzle extends AbstractVectorPuzzle {
         {
             for (int c = 0; c < num_cols; c++)
             {
-                s.append(vector_puzzle_data[c].get_value(r) + ", ");
+                s.append(vector_puzzle_data[c].get_value_at_index(r) + ", ");
             }
 
             s.append("\n");

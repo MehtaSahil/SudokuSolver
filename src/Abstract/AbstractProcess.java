@@ -13,9 +13,9 @@ import java.util.Iterator;
 public abstract class AbstractProcess {
 
     protected Square[][] standard_puzzle;
-    protected AbstractVectorPuzzle row_puzzle;
-    protected AbstractVectorPuzzle col_puzzle;
-    protected BlockPuzzle block_puzzle;
+    protected IPuzzle row_puzzle;
+    protected IPuzzle col_puzzle;
+    protected IPuzzle block_puzzle;
 
     public AbstractProcess(PuzzleContainer pc)
     {
@@ -38,9 +38,13 @@ public abstract class AbstractProcess {
         Square toSet = standard_puzzle[row][col];
         toSet.set_value(new_value);
 
-        row_puzzle.get_vector(row).add_to_contained_values(new_value);
-        col_puzzle.get_vector(col).add_to_contained_values(new_value);
-        block_puzzle.get_block(row / 3, col / 3).add_to_contained_values(new_value);
+        row_puzzle.get_building_block(row).add_to_contained_values(new_value);
+        col_puzzle.get_building_block(col).add_to_contained_values(new_value);
+
+        int hl_row = row / 3;
+        int hl_col = col / 3;
+        int index = (hl_row)*3 + hl_col;
+        block_puzzle.get_building_block(index).add_to_contained_values(new_value);
 
         quick_candidate_update(row, col, new_value);
         update_candidate_counts();
@@ -71,15 +75,19 @@ public abstract class AbstractProcess {
     {
         Iterator<Square> iter;
 
-        iter = row_puzzle.get_vector(row).iterator();
+        iter = row_puzzle.get_building_block(row).iterator();
         while (iter.hasNext())
             iter.next().remove_single_candidate(assigned_value);
 
-        iter = col_puzzle.get_vector(col).iterator();
+        iter = col_puzzle.get_building_block(col).iterator();
         while (iter.hasNext())
             iter.next().remove_single_candidate(assigned_value);
 
-        iter = block_puzzle.get_block(row / 3, col / 3).iterator();
+        int hl_row = row / 3;
+        int hl_col = col / 3;
+
+        int index = (hl_row)*3 + hl_col;
+        iter = block_puzzle.get_building_block(index).iterator();
         while (iter.hasNext())
             iter.next().remove_single_candidate(assigned_value);
     }

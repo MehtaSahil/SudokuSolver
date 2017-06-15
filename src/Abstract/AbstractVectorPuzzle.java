@@ -8,10 +8,10 @@ import java.util.Iterator;
 /**
  * Created by sahil on 5/24/17.
  */
-public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
+public abstract class AbstractVectorPuzzle implements IPuzzle, Iterable<IBuildingBlock> {
     protected final int num_rows;
     protected final int num_cols;
-    protected Vector[] vector_puzzle_data;
+    protected IBuildingBlock[] vector_puzzle_data;
 
     public AbstractVectorPuzzle(Square[][] init_data)
     {
@@ -25,11 +25,11 @@ public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
         init_puzzle_data(init_data);
     }
 
-    protected abstract void init_puzzle_data(Square[][] init_data);
+    public abstract void init_puzzle_data(Square[][] init_data);
 
     public void update_candidate_counts()
     {
-        Iterator<Vector> iter = iterator();
+        Iterator<IBuildingBlock> iter = iterator();
         while (iter.hasNext())
             iter.next().update_candidate_counts();
     }
@@ -38,17 +38,17 @@ public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
      * @param index
      * @return PuzzlePieces.Vector at [index] in vector_puzzle_data
      */
-    public Vector get_vector(int index)
+    public IBuildingBlock get_building_block(int index)
     {
         return vector_puzzle_data[index];
     }
 
-    public Iterator<Vector> iterator()
+    public Iterator<IBuildingBlock> iterator()
     {
         return new AbstractVectorPuzzleIterator();
     }
 
-    private class AbstractVectorPuzzleIterator implements Iterator<Vector>
+    private class AbstractVectorPuzzleIterator implements Iterator<IBuildingBlock>
     {
         private int current_index;
 
@@ -64,7 +64,7 @@ public abstract class AbstractVectorPuzzle implements Iterable<Vector> {
         }
 
         @Override
-        public Vector next() {
+        public IBuildingBlock next() {
             return vector_puzzle_data[current_index++];
         }
     }

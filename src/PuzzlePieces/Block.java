@@ -2,13 +2,15 @@ package PuzzlePieces; /**
  * Created by sahil on 5/23/17.
  */
 
+import Abstract.IBuildingBlock;
+
 import java.util.Iterator;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.HashMap;
 
-public class Block implements Iterable<Square> {
+public class Block implements IBuildingBlock, Iterable<Square> {
 
     /* "high level" row and col represents index of block in 3x3 matrix*/
     private final int hl_row;
@@ -67,6 +69,8 @@ public class Block implements Iterable<Square> {
     {
         return block_data[sub_row][sub_col].get_value();
     }
+
+    public int get_value_at_index(int index) { return block_data[index/3][index%3].get_value(); }
 
     public void add_to_contained_values(int to_add)
     {

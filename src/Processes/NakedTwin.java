@@ -2,6 +2,8 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Abstract.IBuildingBlock;
+import Abstract.IPuzzle;
 import Main.PuzzleContainer;
 import PuzzlePieces.Block;
 import PuzzlePieces.Square;
@@ -40,7 +42,7 @@ public class NakedTwin extends AbstractProcess {
     }
 
     private boolean vector_detect_naked_twin(List<Map<Set<Integer>, Integer>> vector_candidate_counts,
-                                          AbstractVectorPuzzle puzzle)
+                                          IPuzzle puzzle)
     {
         boolean change_made = false;
 
@@ -52,7 +54,7 @@ public class NakedTwin extends AbstractProcess {
             {
                 if (current_map.get(pair) == 2)
                 {
-                    vector_remove_naked_twin_candidates(pair, puzzle.get_vector(row));
+                    vector_remove_naked_twin_candidates(pair, puzzle.get_building_block(row));
                     change_made = true;
                 }
             }
@@ -62,19 +64,19 @@ public class NakedTwin extends AbstractProcess {
     }
 
     private boolean block_detect_naked_twin(List<Map<Set<Integer>, Integer>> block_candidate_counts,
-                                          BlockPuzzle puzzle)
+                                          IPuzzle puzzle)
     {
         boolean change_made = false;
 
-        for (int block = 0; block < block_candidate_counts.size(); block++)
+        for (int block_index = 0; block_index < block_candidate_counts.size(); block_index++)
         {
-            Map<Set<Integer>, Integer> current_map = block_candidate_counts.get(block);
+            Map<Set<Integer>, Integer> current_map = block_candidate_counts.get(block_index);
 
             for (Set<Integer> pair : current_map.keySet())
             {
                 if (current_map.get(pair) == 2)
                 {
-                    block_remove_naked_twin_candidates(pair, puzzle.get_block(block/3, block%3));
+                    block_remove_naked_twin_candidates(pair, puzzle.get_building_block(block_index));
                     change_made = true;
                 }
             }
@@ -84,7 +86,7 @@ public class NakedTwin extends AbstractProcess {
     }
 
 
-    private void vector_remove_naked_twin_candidates(Set<Integer> pair, Vector vector)
+    private void vector_remove_naked_twin_candidates(Set<Integer> pair, IBuildingBlock vector)
     {
         Iterator<Square> vector_iterator = vector.iterator();
         while (vector_iterator.hasNext())
@@ -100,7 +102,7 @@ public class NakedTwin extends AbstractProcess {
         }
     }
 
-    private void block_remove_naked_twin_candidates(Set<Integer> pair, Block block)
+    private void block_remove_naked_twin_candidates(Set<Integer> pair, IBuildingBlock block)
     {
         Iterator<Square> block_iterator = block.iterator();
         while (block_iterator.hasNext())
@@ -116,15 +118,15 @@ public class NakedTwin extends AbstractProcess {
         }
     }
 
-    private List<Map<Set<Integer>, Integer>> get_vector_set_counts(AbstractVectorPuzzle puzzle)
+    private List<Map<Set<Integer>, Integer>> get_vector_set_counts(IPuzzle puzzle)
     {
         List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
 
         /* checking for exposed pairs on rows */
-        Iterator<Vector> row_iterator = puzzle.iterator();
+        Iterator<IBuildingBlock> row_iterator = puzzle.iterator();
         while (row_iterator.hasNext())
         {
-            Vector current_row = row_iterator.next();
+            IBuildingBlock current_row = row_iterator.next();
 
             Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
 
@@ -157,15 +159,15 @@ public class NakedTwin extends AbstractProcess {
         return toReturn;
     }
 
-    private List<Map<Set<Integer>, Integer>> get_block_set_counts(BlockPuzzle puzzle)
+    private List<Map<Set<Integer>, Integer>> get_block_set_counts(IPuzzle puzzle)
     {
         List<Map<Set<Integer>, Integer>> toReturn = new ArrayList<Map<Set<Integer>, Integer>>();
 
         /* checking for exposed pairs on rows */
-        Iterator<Block> block_iterator = puzzle.iterator();
+        Iterator<IBuildingBlock> block_iterator = puzzle.iterator();
         while (block_iterator.hasNext())
         {
-            Block current_block = block_iterator.next();
+            IBuildingBlock current_block = block_iterator.next();
 
             Map<Set<Integer>, Integer> set_counts = new HashMap<Set<Integer>, Integer>();
 

@@ -1,6 +1,7 @@
 package Main;
 
 import Abstract.AbstractVectorPuzzle;
+import Abstract.IPuzzle;
 import PuzzlePieces.Square;
 import SubPuzzles.BlockPuzzle;
 import SubPuzzles.ColPuzzle;
@@ -12,9 +13,9 @@ import SubPuzzles.RowPuzzle;
 public class PuzzleContainer {
 
     public Square[][] standard_puzzle;
-    public AbstractVectorPuzzle row_puzzle;
-    public AbstractVectorPuzzle col_puzzle;
-    public BlockPuzzle block_puzzle;
+    public IPuzzle row_puzzle;
+    public IPuzzle col_puzzle;
+    public IPuzzle block_puzzle;
 
     public PuzzleContainer(Square[][] init_data)
     {

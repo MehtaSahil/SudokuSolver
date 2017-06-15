@@ -1,5 +1,7 @@
 package SubPuzzles;
 
+import Abstract.IBuildingBlock;
+import Abstract.IPuzzle;
 import PuzzlePieces.Block;
 import PuzzlePieces.Square;
 
@@ -9,7 +11,7 @@ import PuzzlePieces.Square;
 
 import java.util.Iterator;
 
-public class BlockPuzzle implements Iterable<Block> {
+public class BlockPuzzle implements IPuzzle, Iterable<IBuildingBlock> {
 
     private final int num_rows;
     private final int num_cols;
@@ -24,14 +26,14 @@ public class BlockPuzzle implements Iterable<Block> {
         block_puzzle_data = new Block[3][3];
         data_size = 3 * 3;
 
-        init_block_puzzle_data(init_data);
+        init_puzzle_data(init_data);
     }
 
     /**
      * Creates blocks to represent input data
      * @param init_data input data
      */
-    private void init_block_puzzle_data(Square[][] init_data)
+    public void init_puzzle_data(Square[][] init_data)
     {
         for (int hl_row = 0; hl_row < 3; hl_row++)
         {
@@ -76,9 +78,14 @@ public class BlockPuzzle implements Iterable<Block> {
         return block_puzzle_data[hl_row][hl_col];
     }
 
+    public IBuildingBlock get_building_block(int index)
+    {
+        return block_puzzle_data[index/3][index%3];
+    }
+
     public void update_candidate_counts()
     {
-        Iterator<Block> iter = iterator();
+        Iterator<IBuildingBlock> iter = iterator();
         while (iter.hasNext())
             iter.next().update_candidate_counts();
     }
@@ -110,12 +117,12 @@ public class BlockPuzzle implements Iterable<Block> {
      * @return An iterator which runs from the top left corner to
      * the bottom right corner of block_puzzle_data[][]
      */
-    public Iterator<Block> iterator()
+    public Iterator<IBuildingBlock> iterator()
     {
         return new BlockPuzzleIterator();
     }
 
-    private class BlockPuzzleIterator implements Iterator<Block>
+    private class BlockPuzzleIterator implements Iterator<IBuildingBlock>
     {
         private int current_hl_row;
         private int current_hl_col;
@@ -132,7 +139,7 @@ public class BlockPuzzle implements Iterable<Block> {
         }
 
         @Override
-        public Block next() {
+        public IBuildingBlock next() {
             Block toReturn = block_puzzle_data[current_hl_row][current_hl_col];
             if (current_hl_col + 1 >= 3)
             {

@@ -1,6 +1,7 @@
 package Main;
 
 import Abstract.AbstractProcess;
+import Abstract.IBuildingBlock;
 import Processes.NakedTwin;
 import Processes.SoleCandidate;
 import Processes.UniqueCandidate;
@@ -85,13 +86,18 @@ public class Solver {
             {
                 Square curr = pc.standard_puzzle[r][c];
 
-                Set<Integer> vals_to_remove = pc.row_puzzle.get_vector(r).get_contained_values();
+                Set<Integer> vals_to_remove = pc.row_puzzle.get_building_block(r).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
 
-                vals_to_remove = pc.col_puzzle.get_vector(c).get_contained_values();
+                vals_to_remove = pc.col_puzzle.get_building_block(c).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
 
-                vals_to_remove = pc.block_puzzle.get_block(r / 3, c / 3).get_contained_values();
+
+                int hl_row = r / 3;
+                int hl_col = c / 3;
+
+                int index = (hl_row)*3 + hl_col;
+                vals_to_remove = pc.block_puzzle.get_building_block(index).get_contained_values();
                 curr.remove_candidates(vals_to_remove);
             }
         }
@@ -108,7 +114,7 @@ public class Solver {
     public boolean is_puzzle_solved()
     {
         /* go through all Squares in puzzle */
-        Iterator<Vector> vector_iter = pc.row_puzzle.iterator();
+        Iterator<IBuildingBlock> vector_iter = pc.row_puzzle.iterator();
         while (vector_iter.hasNext())
         {
             Iterator<Square> square_iter = vector_iter.next().iterator();

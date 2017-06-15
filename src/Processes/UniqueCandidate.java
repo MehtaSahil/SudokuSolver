@@ -2,6 +2,8 @@ package Processes;
 
 import Abstract.AbstractProcess;
 import Abstract.AbstractVectorPuzzle;
+import Abstract.IBuildingBlock;
+import Abstract.IPuzzle;
 import Main.PuzzleContainer;
 import PuzzlePieces.Block;
 import PuzzlePieces.Square;
@@ -35,15 +37,15 @@ public class UniqueCandidate extends AbstractProcess {
      * @param puzzle
      * @return true if a change was made, false otherwise
      */
-    private boolean vector_unique_candidate(AbstractVectorPuzzle puzzle)
+    private boolean vector_unique_candidate(IPuzzle puzzle)
     {
         boolean change_made = false;
-        Iterator<Vector> vector_iterator = puzzle.iterator();
+        Iterator<IBuildingBlock> vector_iterator = puzzle.iterator();
 
         /* for all vectors in the puzzle */
         while (vector_iterator.hasNext())
         {
-            Vector current_vector = vector_iterator.next();
+            IBuildingBlock current_vector = vector_iterator.next();
             Iterator<Square> square_iterator = current_vector.iterator();
 
             /* for all squares in the vector */
@@ -80,12 +82,12 @@ public class UniqueCandidate extends AbstractProcess {
     private boolean block_unique_candidate()
     {
         boolean change_made = false;
-        Iterator<Block> vector_iterator = block_puzzle.iterator();
+        Iterator<IBuildingBlock> vector_iterator = block_puzzle.iterator();
 
         /* for all blocks in the puzzle */
         while (vector_iterator.hasNext())
         {
-            Block current_block = vector_iterator.next();
+            IBuildingBlock current_block = vector_iterator.next();
             Iterator<Square> square_iterator = current_block.iterator();
 
             /* for all squares in the block */

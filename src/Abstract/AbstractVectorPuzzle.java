@@ -9,9 +9,10 @@ import java.util.Iterator;
  * Created by sahil on 5/24/17.
  */
 public abstract class AbstractVectorPuzzle implements IPuzzle, Iterable<IBuildingBlock> {
+
     protected final int num_rows;
     protected final int num_cols;
-    protected IBuildingBlock[] vector_puzzle_data;
+    protected Vector[] vector_puzzle_data;
 
     public AbstractVectorPuzzle(Square[][] init_data)
     {

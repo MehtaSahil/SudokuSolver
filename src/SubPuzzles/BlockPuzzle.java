@@ -140,7 +140,7 @@ public class BlockPuzzle implements IPuzzle, Iterable<IBuildingBlock> {
 
         @Override
         public IBuildingBlock next() {
-            Block toReturn = block_puzzle_data[current_hl_row][current_hl_col];
+            IBuildingBlock toReturn = block_puzzle_data[current_hl_row][current_hl_col];
             if (current_hl_col + 1 >= 3)
             {
                 current_hl_row++;

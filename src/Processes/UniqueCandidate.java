@@ -1,14 +1,10 @@
 package Processes;
 
 import Abstract.AbstractProcess;
-import Abstract.AbstractVectorPuzzle;
 import Abstract.IBuildingBlock;
 import Abstract.IPuzzle;
 import Main.PuzzleContainer;
-import PuzzlePieces.Block;
 import PuzzlePieces.Square;
-import PuzzlePieces.Vector;
-import SubPuzzles.BlockPuzzle;
 
 import java.util.Iterator;
 import java.util.Set;
@@ -25,9 +21,9 @@ public class UniqueCandidate extends AbstractProcess {
      */
     public boolean run_process()
     {
-        boolean row_change = vector_unique_candidate(row_puzzle);
-        boolean col_change = vector_unique_candidate(col_puzzle);
-        boolean block_change = block_unique_candidate();
+        boolean row_change = unique_candidate(row_puzzle);
+        boolean col_change = unique_candidate(col_puzzle);
+        boolean block_change = unique_candidate(block_puzzle);
 
         return row_change || col_change || block_change;
     }
@@ -37,16 +33,16 @@ public class UniqueCandidate extends AbstractProcess {
      * @param puzzle
      * @return true if a change was made, false otherwise
      */
-    private boolean vector_unique_candidate(IPuzzle puzzle)
+    private boolean unique_candidate(IPuzzle puzzle)
     {
         boolean change_made = false;
-        Iterator<IBuildingBlock> vector_iterator = puzzle.iterator();
+        Iterator<IBuildingBlock> building_block_iter = puzzle.iterator();
 
         /* for all vectors in the puzzle */
-        while (vector_iterator.hasNext())
+        while (building_block_iter.hasNext())
         {
-            IBuildingBlock current_vector = vector_iterator.next();
-            Iterator<Square> square_iterator = current_vector.iterator();
+            IBuildingBlock current_building_block = building_block_iter.next();
+            Iterator<Square> square_iterator = current_building_block.iterator();
 
             /* for all squares in the vector */
             while (square_iterator.hasNext())
@@ -58,6 +54,7 @@ public class UniqueCandidate extends AbstractProcess {
                 Set<Integer> candidates = current_square.get_candidates();
                 Iterator<Integer> temp_iter = candidates.iterator();
 
+                /* TODO : make this a collection instead of array ! */
                 Integer[] temp_candidates = new Integer[candidates.size()];
                 int spot = 0;
                 while (temp_iter.hasNext())
@@ -67,49 +64,7 @@ public class UniqueCandidate extends AbstractProcess {
                 for (Integer candidate : temp_candidates)
                 {
                     /* if the candidate is the only one of its kind */
-                    if (current_vector.get_candidate_counts().get(candidate) == 1)
-                    {
-                        set_value(current_row, current_col, candidate);
-                        change_made = true;
-                    }
-                }
-            }
-        }
-
-        return change_made;
-    }
-
-    private boolean block_unique_candidate()
-    {
-        boolean change_made = false;
-        Iterator<IBuildingBlock> vector_iterator = block_puzzle.iterator();
-
-        /* for all blocks in the puzzle */
-        while (vector_iterator.hasNext())
-        {
-            IBuildingBlock current_block = vector_iterator.next();
-            Iterator<Square> square_iterator = current_block.iterator();
-
-            /* for all squares in the block */
-            while (square_iterator.hasNext())
-            {
-                Square current_square = square_iterator.next();
-                int current_row = current_square.get_row();
-                int current_col = current_square.get_col();
-
-                /* test all candidates for uniqueness in block */
-                Set<Integer> candidates = current_square.get_candidates();
-                Iterator<Integer> temp_iter = candidates.iterator();
-
-                Integer[] temp_candidates = new Integer[candidates.size()];
-                int spot = 0;
-                while (temp_iter.hasNext())
-                    temp_candidates[spot++] = temp_iter.next();
-
-                for (Integer candidate : temp_candidates)
-                {
-                    /* if the candidate is the only one of its kind */
-                    if (current_block.get_candidate_counts().get(candidate) == 1)
+                    if (current_building_block.get_candidate_counts().get(candidate) == 1)
                     {
                         set_value(current_row, current_col, candidate);
                         change_made = true;

@@ -6,6 +6,7 @@ import Abstract.IPuzzle;
 import Main.PuzzleContainer;
 import PuzzlePieces.Square;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
@@ -52,13 +53,9 @@ public class UniqueCandidate extends AbstractProcess {
                 int current_col = current_square.get_col();
 
                 Set<Integer> candidates = current_square.get_candidates();
-                Iterator<Integer> temp_iter = candidates.iterator();
 
-                /* TODO : make this a collection instead of array ! */
-                Integer[] temp_candidates = new Integer[candidates.size()];
-                int spot = 0;
-                while (temp_iter.hasNext())
-                    temp_candidates[spot++] = temp_iter.next();
+                /* temp_candidates exists to avoid concurrent modification exception on candidates */
+                Set<Integer> temp_candidates = new HashSet<Integer>(candidates);
 
                 /* test all candidates for uniqueness in vector */
                 for (Integer candidate : temp_candidates)

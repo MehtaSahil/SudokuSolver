@@ -13,5 +13,6 @@ public interface IPuzzle {
     public IBuildingBlock get_building_block(int index);
     public void update_candidate_counts();
 
+    public String toString();
     public Iterator<IBuildingBlock> iterator();
 }

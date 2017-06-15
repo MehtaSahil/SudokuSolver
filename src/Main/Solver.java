@@ -114,10 +114,10 @@ public class Solver {
     public boolean is_puzzle_solved()
     {
         /* go through all Squares in puzzle */
-        Iterator<IBuildingBlock> vector_iter = pc.row_puzzle.iterator();
-        while (vector_iter.hasNext())
+        Iterator<IBuildingBlock> building_block_iter = pc.row_puzzle.iterator();
+        while (building_block_iter.hasNext())
         {
-            Iterator<Square> square_iter = vector_iter.next().iterator();
+            Iterator<Square> square_iter = building_block_iter.next().iterator();
             while (square_iter.hasNext())
             {
                 if (!square_iter.next().is_assigned())

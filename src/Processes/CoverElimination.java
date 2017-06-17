@@ -1,7 +1,11 @@
 package Processes;
 
 import Abstract.AbstractProcess;
+import Abstract.IBuildingBlock;
+import Abstract.IPuzzle;
 import Main.PuzzleContainer;
+import PuzzlePieces.Square;
+import sun.net.util.IPAddressUtil;
 
 import java.util.*;
 
@@ -10,20 +14,26 @@ import java.util.*;
  */
 public class CoverElimination extends AbstractProcess {
 
-    private Set<String> combinations;
+    private Set<List<Integer>> combinations;
 
     public CoverElimination(PuzzleContainer pc)
     {
         super(pc);
-        combinations = new HashSet<String>();
+        combinations = new HashSet<List<Integer>>();
     }
 
     @Override
     public boolean run_process()
     {
-        // for each row
-        // for each col
-        // for each block
+        boolean change_made = false;
+
+        List<IPuzzle> puzzles = new ArrayList<IPuzzle>();
+        puzzles.add(row_puzzle);
+        puzzles.add(col_puzzle);
+        puzzles.add(block_puzzle);
+
+        for (IPuzzle puzzle : puzzles)
+            process_covers_for_IPuzzle(puzzle);
 
         /**
          * identify which indices are valid based on which spots are already filled
@@ -36,15 +46,72 @@ public class CoverElimination extends AbstractProcess {
          * if a union is found, remove covered candidates from the appropriate row/col/block and mark change_made
          */
 
-        List<Integer> indices = new ArrayList<Integer>();
-        indices.add(1);
-        indices.add(2);
-        indices.add(3);
-
-        fill_combinations_for_indices(indices);
-        System.out.println(combinations);
-
         return false;
+    }
+
+    private void process_covers_for_IPuzzle(IPuzzle puzzle)
+    {
+        Iterator<IBuildingBlock> building_block_iter = puzzle.iterator();
+        while (building_block_iter.hasNext())
+        {
+            IBuildingBlock current = building_block_iter.next();
+
+            List<Integer> valid_indices = new ArrayList<Integer>();
+            for (int i = 0; i < 9; i++)
+                valid_indices.add(i);
+
+            /* remove indices that have already been assigned */
+            int current_index = 0;
+            Iterator<Square> iter = current.iterator();
+            while (iter.hasNext())
+            {
+                Square current_square = iter.next();
+                if (current_square.is_assigned())
+                    valid_indices.remove(valid_indices.indexOf(current_index));
+
+                current_index++;
+            }
+
+            fill_combinations_for_indices(valid_indices);
+
+            /* go through all possible indices looking for a cover */
+            for (List<Integer> combination : combinations)
+            {
+                List<Square> squares = get_squares_by_index_list(combination, current);
+                Set<Integer> candidate_union = get_candidate_union(squares);
+
+                if (combination.size() == candidate_union.size())
+                {
+                    /* remove covered candidates from rest of IBuildingBlock */
+                    int temp_index = 0;
+                    Iterator<Square> temp_iter = current.iterator();
+                    while (temp_iter.hasNext())
+                    {
+                        Square temp_square = temp_iter.next();
+                        if (combination.contains(temp_index++))
+                            continue;
+
+                        temp_square.remove_candidates(candidate_union);
+                    }
+                }
+            }
+        }
+    }
+
+    private Set<Integer> get_candidate_union(List<Square> squares) {
+        Set<Integer> union = new HashSet<Integer>();
+
+        for (Square s : squares) {
+            union.addAll(s.get_candidates());
+        }
+
+        return union;
+    }
+
+
+    private List<Square> get_squares_by_index_list(List<Integer> indices, IBuildingBlock building_block)
+    {
+        return building_block.get_squares_by_index_list(indices);
     }
 
     /**
@@ -85,16 +152,16 @@ public class CoverElimination extends AbstractProcess {
 
         combination(input, counts, output, 0, 0);
 
-        clean_combinations();
+        clean_combinations(indices.size());
     }
 
-    private void clean_combinations()
+    private void clean_combinations(int max_length)
     {
-        Iterator<String> comb_iterator = combinations.iterator();
+        Iterator<List<Integer>> comb_iterator = combinations.iterator();
         while (comb_iterator.hasNext())
         {
-            String curr_str = comb_iterator.next();
-            if (curr_str.length() == 0 || curr_str.length() == 1)
+            List<Integer> curr_str = comb_iterator.next();
+            if (curr_str.size() == 0 || curr_str.size() == 1 || curr_str.size() == max_length)
             {
                 comb_iterator.remove();
             }
@@ -127,14 +194,14 @@ public class CoverElimination extends AbstractProcess {
 
     private void print(int[] input, int stop)
     {
-        StringBuilder s = new StringBuilder();
+        List<Integer> to_add = new ArrayList<Integer>();
         for (int i = 0; i < stop; i++)
         {
 //            System.out.print(input[i] + " ");
-            s.append(input[i]);
+            to_add.add(input[i]);
         }
 //        System.out.println();
 
-        combinations.add(s.toString());
+        combinations.add(to_add);
     }
 }

@@ -4,11 +4,7 @@ package PuzzlePieces; /**
 
 import Abstract.IBuildingBlock;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class Vector implements IBuildingBlock, Iterable<Square> {
 
@@ -57,8 +53,10 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
         if (index > vector_data.length)
             throw new IllegalArgumentException("PuzzlePieces.Vector index out of bounds");
 
-        return vector_data[index].get_value();
+        return get_square_at_index(index).get_value();
     }
+
+    public Square get_square_at_index(int index) { return vector_data[index]; }
 
     public void add_to_contained_values(int to_add)
     {
@@ -96,6 +94,15 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
                 }
             }
         }
+    }
+
+    public List<Square> get_squares_by_index_list(List<Integer> indices)
+    {
+        List<Square> to_return = new ArrayList<Square>();
+        for (Integer index : indices)
+            to_return.add(get_square_at_index(index));
+
+        return to_return;
     }
 
     public String toString()

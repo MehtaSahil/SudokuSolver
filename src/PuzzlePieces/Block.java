@@ -4,11 +4,7 @@ package PuzzlePieces; /**
 
 import Abstract.IBuildingBlock;
 
-import java.util.Iterator;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 public class Block implements IBuildingBlock, Iterable<Square> {
 
@@ -70,7 +66,9 @@ public class Block implements IBuildingBlock, Iterable<Square> {
         return block_data[sub_row][sub_col].get_value();
     }
 
-    public int get_value_at_index(int index) { return block_data[index/3][index%3].get_value(); }
+    public int get_value_at_index(int index) { return get_square_at_index(index).get_value(); }
+
+    public Square get_square_at_index(int index) { return block_data[index/3][index%3]; }
 
     public void add_to_contained_values(int to_add)
     {
@@ -108,6 +106,15 @@ public class Block implements IBuildingBlock, Iterable<Square> {
                 }
             }
         }
+    }
+
+    public List<Square> get_squares_by_index_list(List<Integer> indices)
+    {
+        List<Square> to_return = new ArrayList<Square>();
+        for (Integer index : indices)
+            to_return.add(get_square_at_index(index));
+
+        return to_return;
     }
 
     public String toString()

@@ -51,10 +51,10 @@ public class Solver {
 
         /* ALWAYS SIMPLIFY BEFORE SOLVING (known issue) */
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
-//        processes.add(new NakedTwin(pc));
+        processes.add(new NakedTwin(pc));
         processes.add(new CoverElimination(pc));
-//        processes.add(new SoleCandidate(pc));
-//        processes.add(new UniqueCandidate(pc));
+        processes.add(new SoleCandidate(pc));
+        processes.add(new UniqueCandidate(pc));
 
         /* continue executing until none of the available processes can make a change */
         while (true)

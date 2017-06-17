@@ -2,6 +2,7 @@ package Main;
 
 import Abstract.AbstractProcess;
 import Abstract.IBuildingBlock;
+import Processes.CoverElimination;
 import Processes.NakedTwin;
 import Processes.SoleCandidate;
 import Processes.UniqueCandidate;
@@ -48,10 +49,12 @@ public class Solver {
          * This should lead to a really clean solving loop when more Processes come online
          */
 
+        /* ALWAYS SIMPLIFY BEFORE SOLVING (known issue) */
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
-        processes.add(new SoleCandidate(pc));
-        processes.add(new UniqueCandidate(pc));
-        processes.add(new NakedTwin(pc));
+//        processes.add(new NakedTwin(pc));
+        processes.add(new CoverElimination(pc));
+//        processes.add(new SoleCandidate(pc));
+//        processes.add(new UniqueCandidate(pc));
 
         /* continue executing until none of the available processes can make a change */
         while (true)

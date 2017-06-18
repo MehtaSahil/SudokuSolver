@@ -5,7 +5,6 @@ import Abstract.IBuildingBlock;
 import Abstract.IPuzzle;
 import Main.PuzzleContainer;
 import PuzzlePieces.Square;
-import sun.net.util.IPAddressUtil;
 
 import java.util.*;
 
@@ -14,12 +13,12 @@ import java.util.*;
  */
 public class CoverElimination extends AbstractProcess {
 
-    private Set<List<Integer>> combinations;
+    private Set<Set<Integer>> combinations;
 
     public CoverElimination(PuzzleContainer pc)
     {
         super(pc);
-        combinations = new HashSet<List<Integer>>();
+        combinations = new HashSet<Set<Integer>>();
     }
 
     @Override
@@ -49,6 +48,10 @@ public class CoverElimination extends AbstractProcess {
         return false;
     }
 
+    /**
+     * finds covering sets in the provided puzzle and eliminates candidates in affected sets
+     * @param puzzle
+     */
     private void process_covers_for_IPuzzle(IPuzzle puzzle)
     {
         Iterator<IBuildingBlock> building_block_iter = puzzle.iterator();
@@ -75,9 +78,9 @@ public class CoverElimination extends AbstractProcess {
             fill_combinations_for_indices(valid_indices);
 
             /* go through all possible indices looking for a cover */
-            for (List<Integer> combination : combinations)
+            for (Set<Integer> combination : combinations)
             {
-                List<Square> squares = get_squares_by_index_list(combination, current);
+                Set<Square> squares = get_squares_by_index_list(combination, current);
                 Set<Integer> candidate_union = get_candidate_union(squares);
 
                 if (combination.size() == candidate_union.size())
@@ -98,7 +101,13 @@ public class CoverElimination extends AbstractProcess {
         }
     }
 
-    private Set<Integer> get_candidate_union(List<Square> squares) {
+    /**
+     * Finds the union of the candidate sets of the provided squares
+     * @param squares
+     * @return the union of the candidate sets of the provided squares
+     */
+    private Set<Integer> get_candidate_union(Set<Square> squares) {
+
         Set<Integer> union = new HashSet<Integer>();
 
         for (Square s : squares) {
@@ -108,8 +117,13 @@ public class CoverElimination extends AbstractProcess {
         return union;
     }
 
-
-    private List<Square> get_squares_by_index_list(List<Integer> indices, IBuildingBlock building_block)
+    /**
+     * Given a set of indices, get the squares in the building block at those indices
+     * @param indices
+     * @param building_block
+     * @return the Squares in the building block at those indices
+     */
+    private Set<Square> get_squares_by_index_list(Set<Integer> indices, IBuildingBlock building_block)
     {
         return building_block.get_squares_by_index_list(indices);
     }
@@ -155,15 +169,19 @@ public class CoverElimination extends AbstractProcess {
         clean_combinations(indices.size());
     }
 
+    /**
+     * Removes unecessary entries in combinations (0, 1, and max length aren't useful to test)
+     * @param max_length
+     */
     private void clean_combinations(int max_length)
     {
-        Iterator<List<Integer>> comb_iterator = combinations.iterator();
-        while (comb_iterator.hasNext())
+        Iterator<Set<Integer>> combination_iter = combinations.iterator();
+        while (combination_iter.hasNext())
         {
-            List<Integer> curr_str = comb_iterator.next();
+            Set<Integer> curr_str = combination_iter.next();
             if (curr_str.size() == 0 || curr_str.size() == 1 || curr_str.size() == max_length)
             {
-                comb_iterator.remove();
+                combination_iter.remove();
             }
         }
     }
@@ -179,7 +197,7 @@ public class CoverElimination extends AbstractProcess {
      */
     private void combination(int[] input, int[] counts, int[] output, int start_pos, int level)
     {
-        print(output, level);
+        save_combination(output, level);
         for (int i = start_pos; i < input.length; i++)
         {
             if (counts[i] == 0)
@@ -192,15 +210,11 @@ public class CoverElimination extends AbstractProcess {
         }
     }
 
-    private void print(int[] input, int stop)
+    private void save_combination(int[] input, int stop)
     {
-        List<Integer> to_add = new ArrayList<Integer>();
+        Set<Integer> to_add = new HashSet<Integer>();
         for (int i = 0; i < stop; i++)
-        {
-//            System.out.print(input[i] + " ");
             to_add.add(input[i]);
-        }
-//        System.out.println();
 
         combinations.add(to_add);
     }

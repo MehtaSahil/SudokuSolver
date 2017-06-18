@@ -25,7 +25,7 @@ public interface IBuildingBlock {
     public Set<Integer> get_contained_values();
     public Map<Integer, Integer> get_candidate_counts();
     public void update_candidate_counts();
-    public List<Square> get_squares_by_index_list(List<Integer> indices);
+    public Set<Square> get_squares_by_index_list(Set<Integer> indices);
 
     public String toString();
     public Iterator<Square> iterator();

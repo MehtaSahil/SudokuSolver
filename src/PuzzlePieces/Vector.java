@@ -96,9 +96,9 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
         }
     }
 
-    public List<Square> get_squares_by_index_list(List<Integer> indices)
+    public Set<Square> get_squares_by_index_list(Set<Integer> indices)
     {
-        List<Square> to_return = new ArrayList<Square>();
+        Set<Square> to_return = new HashSet<Square>();
         for (Integer index : indices)
             to_return.add(get_square_at_index(index));
 

@@ -91,5 +91,5 @@ public class Square {
         return col;
     }
 
-    public void set_value(int new_value) { value = new_value; }
+    public void set_value(Integer new_value) { value = new_value; }
 }

@@ -48,16 +48,14 @@ public class Solver {
 
         /* ALWAYS SIMPLIFY BEFORE SOLVING (known issue) */
         List<AbstractProcess> processes = new ArrayList<AbstractProcess>();
-        processes.add(new NakedTwin(pc));
-        processes.add(new CoverElimination(pc));
-        processes.add(new SoleCandidate(pc));
-        processes.add(new UniqueCandidate(pc));
+//        processes.add(new NakedTwin(pc));
+//        processes.add(new CoverElimination(pc));
+//        processes.add(new SoleCandidate(pc));
+//        processes.add(new UniqueCandidate(pc));
 
         /* continue executing until none of the available processes can make a change */
         while (true)
         {
-            System.out.println("new process runthrough");
-
             boolean curr_iter_change_made = false;
 
             /* will set curr_iter_change_made to true if a change was made */
@@ -74,8 +72,12 @@ public class Solver {
         }
 
         /* only as a last resort do we want to brute force a puzzle */
-        AbstractProcess brute_force = new BruteForce(pc);
-        brute_force.execute();
+        if (!is_puzzle_solved())
+        {
+            System.out.println("finishing solution with brute force");
+            AbstractProcess brute_force = new BruteForce(pc);
+            brute_force.execute();
+        }
     }
 
     /**

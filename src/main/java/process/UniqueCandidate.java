@@ -34,7 +34,7 @@ public class UniqueCandidate extends AbstractProcess {
      * @param puzzle
      * @return true if a change was made, false otherwise
      */
-    private boolean unique_candidate(IPuzzle puzzle)
+    public boolean unique_candidate(IPuzzle puzzle)
     {
         boolean change_made = false;
         Iterator<IBuildingBlock> building_block_iter = puzzle.iterator();

@@ -1,10 +1,8 @@
-package Processes;
+package main.java.process;
 
-import Abstract.AbstractProcess;
-import Abstract.AbstractVectorPuzzle;
-import Main.PuzzleContainer;
-import PuzzlePieces.Square;
-import SubPuzzles.BlockPuzzle;
+import main.java.abstraction.AbstractProcess;
+import main.java.runner.PuzzleContainer;
+import main.java.puzzlepiece.Square;
 
 /**
  * Created by sahil on 5/25/17.

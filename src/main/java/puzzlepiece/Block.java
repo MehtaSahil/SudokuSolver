@@ -1,8 +1,8 @@
-package PuzzlePieces; /**
+package main.java.puzzlepiece; /**
  * Created by sahil on 5/23/17.
  */
 
-import Abstract.IBuildingBlock;
+import main.java.abstraction.IBuildingBlock;
 
 import java.util.*;
 
@@ -32,7 +32,7 @@ public class Block implements IBuildingBlock, Iterable<Square> {
 
         /* check that init_data is a 3x3 matrix */
         if (init_data.length != 3 || init_data[0].length != 3)
-            throw new IllegalArgumentException("PuzzlePieces.Block Constructor: init_data must be 3x3");
+            throw new IllegalArgumentException("main.java.puzzlepiece.Block Constructor: init_data must be 3x3");
 
         block_data = init_data;
         num_rows = block_data.length;

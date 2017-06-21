@@ -1,7 +1,7 @@
-package Abstract;
+package main.java.abstraction;
 
-import PuzzlePieces.Square;
-import PuzzlePieces.Vector;
+import main.java.puzzlepiece.Square;
+import main.java.puzzlepiece.Vector;
 
 import java.util.Iterator;
 
@@ -20,7 +20,7 @@ public abstract class AbstractVectorPuzzle implements IPuzzle, Iterable<IBuildin
         num_cols = init_data[0].length;
 
         if (num_rows != num_cols || num_rows != 9)
-            throw new IllegalArgumentException("SubPuzzles.RowPuzzle Constructor: init_data must be 9x9");
+            throw new IllegalArgumentException("main.java.subpuzzle.RowPuzzle Constructor: init_data must be 9x9");
 
         vector_puzzle_data = new Vector[num_rows];
         init_puzzle_data(init_data);
@@ -37,7 +37,7 @@ public abstract class AbstractVectorPuzzle implements IPuzzle, Iterable<IBuildin
 
     /**
      * @param index
-     * @return PuzzlePieces.Vector at [index] in vector_puzzle_data
+     * @return main.java.puzzlepiece.Vector at [index] in vector_puzzle_data
      */
     public IBuildingBlock get_building_block(int index)
     {

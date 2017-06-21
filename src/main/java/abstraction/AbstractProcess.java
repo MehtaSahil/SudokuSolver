@@ -1,8 +1,7 @@
-package Abstract;
+package main.java.abstraction;
 
-import Main.PuzzleContainer;
-import PuzzlePieces.Square;
-import SubPuzzles.BlockPuzzle;
+import main.java.runner.PuzzleContainer;
+import main.java.puzzlepiece.Square;
 
 /**
  * Created by sahil on 5/25/17.

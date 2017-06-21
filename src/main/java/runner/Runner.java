@@ -1,12 +1,12 @@
-package Main;
+package main.java.runner;
 
-import PuzzlePieces.Square;
+import main.java.puzzlepiece.Square;
 
 /**
  * Created by sahil on 5/23/17.
  */
 
-public class Main {
+public class Runner {
     public static void main(String[] args)
     {
         // main runner code will go

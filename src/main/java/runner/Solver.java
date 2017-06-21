@@ -1,10 +1,9 @@
-package Main;
+package main.java.runner;
 
-import Abstract.AbstractProcess;
-import Abstract.IBuildingBlock;
-import Processes.*;
-import PuzzlePieces.Square;
-import PuzzlePieces.Vector;
+import main.java.abstraction.AbstractProcess;
+import main.java.abstraction.IBuildingBlock;
+import main.java.process.*;
+import main.java.puzzlepiece.Square;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -43,7 +42,7 @@ public class Solver {
     {
         /**
          * Plan to have a list of AbstractProcesses through which we can just call .execute()
-         * This should lead to a really clean solving loop when more Processes come online
+         * This should lead to a really clean solving loop when more main.java.process come online
          */
 
         /* ALWAYS SIMPLIFY BEFORE SOLVING (known issue) */
@@ -81,8 +80,8 @@ public class Solver {
     }
 
     /**
-     * Goes through every PuzzlePieces.Square and updates its availabe candidates
-     * based on filled values in Row/Col/PuzzlePieces.Block Puzzles
+     * Goes through every main.java.puzzlepiece.Square and updates its availabe candidates
+     * based on filled values in Row/Col/main.java.puzzlepiece.Block Puzzles
      */
     private void init_candidates()
     {

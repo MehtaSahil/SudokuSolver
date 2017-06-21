@@ -1,8 +1,8 @@
-package SubPuzzles;
+package main.java.subpuzzle;
 
-import Abstract.AbstractVectorPuzzle;
-import PuzzlePieces.Square;
-import PuzzlePieces.Vector;
+import main.java.abstraction.AbstractVectorPuzzle;
+import main.java.puzzlepiece.Square;
+import main.java.puzzlepiece.Vector;
 
 /**
  * Created by sahil on 5/23/17.
@@ -21,7 +21,7 @@ public class ColPuzzle extends AbstractVectorPuzzle {
      */
     public void init_puzzle_data(Square[][] init_data)
     {
-        /* create a new PuzzlePieces.Vector for each col in init_data */
+        /* create a new main.java.puzzlepiece.Vector for each col in init_data */
         for (int c = 0; c < num_cols; c++)
         {
             Square[] slice = new Square[num_cols];

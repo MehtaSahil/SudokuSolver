@@ -1,10 +1,10 @@
-package Processes;
+package main.java.process;
 
-import Abstract.AbstractProcess;
-import Abstract.IBuildingBlock;
-import Abstract.IPuzzle;
-import Main.PuzzleContainer;
-import PuzzlePieces.Square;
+import main.java.abstraction.AbstractProcess;
+import main.java.abstraction.IBuildingBlock;
+import main.java.abstraction.IPuzzle;
+import main.java.runner.PuzzleContainer;
+import main.java.puzzlepiece.Square;
 
 import java.util.HashSet;
 import java.util.Iterator;

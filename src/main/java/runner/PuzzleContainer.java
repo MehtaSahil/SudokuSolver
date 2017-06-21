@@ -1,11 +1,10 @@
-package Main;
+package main.java.runner;
 
-import Abstract.AbstractVectorPuzzle;
-import Abstract.IPuzzle;
-import PuzzlePieces.Square;
-import SubPuzzles.BlockPuzzle;
-import SubPuzzles.ColPuzzle;
-import SubPuzzles.RowPuzzle;
+import main.java.abstraction.IPuzzle;
+import main.java.puzzlepiece.Square;
+import main.java.subpuzzle.BlockPuzzle;
+import main.java.subpuzzle.ColPuzzle;
+import main.java.subpuzzle.RowPuzzle;
 
 /**
  * Created by sahil on 6/11/17.

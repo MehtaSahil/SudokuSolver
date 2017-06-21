@@ -1,9 +1,9 @@
-package SubPuzzles;
+package main.java.subpuzzle;
 
-import Abstract.IBuildingBlock;
-import Abstract.IPuzzle;
-import PuzzlePieces.Block;
-import PuzzlePieces.Square;
+import main.java.abstraction.IBuildingBlock;
+import main.java.abstraction.IPuzzle;
+import main.java.puzzlepiece.Block;
+import main.java.puzzlepiece.Square;
 
 /**
  * Created by sahil on 5/23/17.
@@ -46,10 +46,10 @@ public class BlockPuzzle implements IPuzzle, Iterable<IBuildingBlock> {
     }
 
     /**
-     * @param hl_row the "high level" row index of the PuzzlePieces.Block to be created
-     * @param hl_col the "high level" col index of the PuzzlePieces.Block to be created
+     * @param hl_row the "high level" row index of the main.java.puzzlepiece.Block to be created
+     * @param hl_col the "high level" col index of the main.java.puzzlepiece.Block to be created
      * @param init_data input data
-     * @return Returns a sub-matrix representing a 3x3 section of the puzzle (i.e. a PuzzlePieces.Block)
+     * @return Returns a sub-matrix representing a 3x3 section of the puzzle (i.e. a main.java.puzzlepiece.Block)
      */
     private Square[][] get_square_sub_matrix(int hl_row, int hl_col, Square[][] init_data)
     {

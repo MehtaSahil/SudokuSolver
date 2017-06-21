@@ -1,9 +1,8 @@
-package Abstract;
+package main.java.abstraction;
 
-import PuzzlePieces.Square;
+import main.java.puzzlepiece.Square;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 

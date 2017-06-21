@@ -1,6 +1,6 @@
-package Main;
+package main.java.runner;
 
-import PuzzlePieces.Square;
+import main.java.puzzlepiece.Square;
 
 /**
  * Created by sahil on 5/23/17.
@@ -19,7 +19,7 @@ public class PuzzleConverterUtils {
         int num_cols = init_data[0].length;
 
         if (num_rows != num_cols || num_rows != 9)
-            throw new IllegalArgumentException("Main.PuzzleConverterUtils Constructor: init_data must be 9x9");
+            throw new IllegalArgumentException("main.java.runner.PuzzleConverterUtils Constructor: init_data must be 9x9");
 
         /**
          * create matrix of Squares with identical data

@@ -1,8 +1,8 @@
-package PuzzlePieces; /**
+package main.java.puzzlepiece; /**
  * Created by sahil on 5/23/17.
  */
 
-import Abstract.IBuildingBlock;
+import main.java.abstraction.IBuildingBlock;
 
 import java.util.*;
 
@@ -11,14 +11,14 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
     /**
      * vector_data holds the Squares present in the vector
      * contained_values is a Set all VALUES contained in vector_data
-     *      this is useful in updating PuzzlePieces.Square candidates
+     *      this is useful in updating main.java.puzzlepiece.Square candidates
      */
     private Square[] vector_data;
     private Set<Integer> contained_values;
     private Map<Integer, Integer> candidate_counts;
 
     /**
-     * copies a reference to a PuzzlePieces.Square[] (PuzzlePieces.Vector) into vector_data
+     * copies a reference to a main.java.puzzlepiece.Square[] (main.java.puzzlepiece.Vector) into vector_data
      * initializes contained_values (used to maintain Solver)
      * @param init_data
      */
@@ -26,7 +26,7 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
     {
         /* verify 9x9 board */
         if (init_data.length != 9)
-            throw new IllegalArgumentException("PuzzlePieces.Vector Constructor: init_data must be length 9");
+            throw new IllegalArgumentException("main.java.puzzlepiece.Vector Constructor: init_data must be length 9");
 
         vector_data = init_data;
 
@@ -46,12 +46,12 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
 
     /**
      * @param index
-     * @return Integer value of the PuzzlePieces.Square at [index] in vector_data
+     * @return Integer value of the main.java.puzzlepiece.Square at [index] in vector_data
      */
     public int get_value_at_index(int index)
     {
         if (index > vector_data.length)
-            throw new IllegalArgumentException("PuzzlePieces.Vector index out of bounds");
+            throw new IllegalArgumentException("main.java.puzzlepiece.Vector index out of bounds");
 
         return get_square_at_index(index).get_value();
     }

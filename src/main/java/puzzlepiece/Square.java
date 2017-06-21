@@ -1,4 +1,4 @@
-package PuzzlePieces; /**
+package main.java.puzzlepiece; /**
  * Created by sahil on 5/23/17.
  */
 

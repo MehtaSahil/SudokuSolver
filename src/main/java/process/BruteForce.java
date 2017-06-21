@@ -1,8 +1,8 @@
-package Processes;
+package main.java.process;
 
-import Abstract.AbstractProcess;
-import Main.PuzzleContainer;
-import Main.PuzzleConverterUtils;
+import main.java.abstraction.AbstractProcess;
+import main.java.runner.PuzzleContainer;
+import main.java.runner.PuzzleConverterUtils;
 
 /**
  * Created by sahil on 6/20/17.

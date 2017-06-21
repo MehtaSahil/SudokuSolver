@@ -2,10 +2,7 @@ package Main;
 
 import Abstract.AbstractProcess;
 import Abstract.IBuildingBlock;
-import Processes.CoverElimination;
-import Processes.NakedTwin;
-import Processes.SoleCandidate;
-import Processes.UniqueCandidate;
+import Processes.*;
 import PuzzlePieces.Square;
 import PuzzlePieces.Vector;
 
@@ -26,7 +23,7 @@ public class Solver {
      *      so changing data in one will change data in the others
      *      In other words, they do NOT require extra maintenance
      */
-    PuzzleContainer pc;
+    private PuzzleContainer pc;
 
     private int num_rows;
     private int num_cols;
@@ -75,6 +72,10 @@ public class Solver {
             if (is_puzzle_solved())
                 break;
         }
+
+        /* only as a last resort do we want to brute force a puzzle */
+        AbstractProcess brute_force = new BruteForce(pc);
+        brute_force.execute();
     }
 
     /**

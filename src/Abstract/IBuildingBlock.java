@@ -23,6 +23,7 @@ public interface IBuildingBlock {
 
     public void add_to_contained_values(int to_add);
     public Set<Integer> get_contained_values();
+    public boolean contains_value(int to_find);
     public Map<Integer, Integer> get_candidate_counts();
     public void update_candidate_counts();
     public Set<Square> get_squares_by_index_list(Set<Integer> indices);

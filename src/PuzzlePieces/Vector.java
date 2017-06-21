@@ -68,6 +68,8 @@ public class Vector implements IBuildingBlock, Iterable<Square> {
         return contained_values;
     }
 
+    public boolean contains_value(int to_find) {return get_contained_values().contains(to_find); }
+
     public Map<Integer, Integer> get_candidate_counts()
     {
         return candidate_counts;

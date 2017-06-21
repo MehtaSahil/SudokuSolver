@@ -24,4 +24,13 @@ public class PuzzleContainer {
         col_puzzle = new ColPuzzle(init_data);
         block_puzzle = new BlockPuzzle(init_data);
     }
+
+    public void set_data(Square[][] new_data)
+    {
+        standard_puzzle = new_data;
+        row_puzzle = new RowPuzzle(new_data);
+        col_puzzle = new ColPuzzle(new_data);
+        block_puzzle = new BlockPuzzle(new_data);
+    }
+
 }
